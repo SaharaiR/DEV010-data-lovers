@@ -6,5 +6,8 @@ import data from './data/pokemon/pokemon.js';
 const contenedor = document.querySelector('.contenedorFlex');
 for(let i = 0; i<data.pokemon.length; i++){
   //console.log(data.pokemon[i].name);
-  contenedor.innerHTML += `<figure><img src = ${data.pokemon[i].img}><figcaption>${data.pokemon[i].num} - ${data.pokemon[i].name}</figcaption></figure>`
+  const numeroPkn = "No. " + data.pokemon[i].num;
+  const nombrePkn = (data.pokemon[i].name).toUpperCase();
+  const pesoAltPkn = "Altura: " + (data.pokemon[i].size.height) + " " + "Peso: " + (data.pokemon[i].size.weight);
+  contenedor.innerHTML += `<figure><img src = ${data.pokemon[i].img}><figcaption>${numeroPkn}<br>${nombrePkn}</br><br>${pesoAltPkn}</br></figcaption></figure>`
 }
