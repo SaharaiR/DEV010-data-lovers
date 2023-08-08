@@ -6,5 +6,5 @@ import data from './data/pokemon/pokemon.js';
 const contenedor = document.querySelector('.contenedorFlex');
 for(let i = 0; i<data.pokemon.length; i++){
   //console.log(data.pokemon[i].name);
-  contenedor.innerHTML += `<figure><img src = ${data.pokemon[i].img}><figcaption>${data.pokemon[i].name}</figcaption></figure>`
+  contenedor.innerHTML += `<figure><img src = ${data.pokemon[i].img}><figcaption>${data.pokemon[i].num} - ${data.pokemon[i].name}</figcaption></figure>`
 }
