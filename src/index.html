@@ -19,8 +19,8 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/800px-Pokebola-pokeball-png-0.png">
     </section>
     <header>Bienvenido a esta aventura...</header> 
-    <nav>Selecciona la región para explorar Pokemones</nav>
-    <main class = "show">
+    <nav class = "hide">Selecciona la región para explorar Pokemones</nav>
+    <main class = "hide">
       <section class="container"> 
         <button name="johto">Región Johto</button>  
         <button name="kanto">Región Kanto</button>  
@@ -33,9 +33,9 @@
     <div id = "barraFiltros" class = "hide">
 
     </div>
-    <div id="root" class = "hide">
-      <div class = "contenedorFlex">
-
+    <div id="root" class = "show">
+      <div id = "tarjetas">
+        <template id="paginas"><div class = "paginas"></div></template>
       </div>
     </div>
     <script src="main.js" type="module"></script>
