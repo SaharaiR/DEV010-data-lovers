@@ -1,4 +1,3 @@
-
 header {
 font-family: 'Black Han Sans', sans-serif;
 font-size: 60px;
@@ -17,8 +16,8 @@ nav {
 
   
 body {
-    background-image: url("https://cutewallpaper.org/21/pokemon-grass-background/Pokemon-forest-by-BlazingIfrit-Fur-Affinity-dot-net.jpg");
-    background-size: cover;
+    background-image: url("https://fondosmil.com/fondo/21794.png");
+    background-size: auto;
     background-repeat: no-repeat; 
 }  
 
@@ -68,33 +67,33 @@ button[name="kanto"]{
     
         
     }
-
+    
     .container {
         display: flex;
         align-items: center;
         justify-content:space-around; 
         height: 100px; 
     }
-
+    
     .container-img {
         display: flex;
         align-items: center;
         justify-content:space-around; 
         height: 100px; 
-
     }
+
     img [name= "img-kanto"]{
-    border: 3px, rgb(17, 67, 219);
-    padding: 40px 60px;
-    width: 100px;
-    }
-
-    img [name= "img-johto"]{
         border: 3px, rgb(17, 67, 219);
         padding: 40px 60px;
         width: 100px;
-        }
-
+    }
+    
+    img [name= "img-johto"]{
+            border: 3px, rgb(17, 67, 219);
+            padding: 40px 60px;
+            width: 100px;
+    }
+    
     footer{
         font-family: 'Black Han Sans', sans-serif;
         font-size: 15px;
@@ -106,16 +105,47 @@ button[name="kanto"]{
         align-items:center;
         background-color: rgb(255,215,0);
     }
-.img-pokemon1{
+    
+    .img-pokemon1{
         display: flex;
         align-items: center;
         justify-content:space-between; 
         height: 100px;
     }
-
+    
     .hide {
         display: none;
-      }
-      .show {
+    }
+    .show {
         display: block;
-      }
+    }
+
+    #tarjetas{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        border-radius: 10px;
+        border: 1px solid black;
+    }
+
+    /*.tarjeta{
+        /*display:flex;
+        flex-direction:row;
+        justify-content:space-between;
+        width: auto;
+        border: 1px solid lightgray;
+        box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+        border-radius:15px;
+        font-family: sans-serif;*/
+        /*max-width: 65vw;
+        margin: 48px auto;
+        display: block;
+        border-radius: 10px;
+        border: 1px solid black;
+        overflow: hidden;
+        display: grid;
+    }
+
+    .imagenPkn{
+        width: 100%;
+        object-fit: cover;
+    }*/
