@@ -29,33 +29,30 @@ header {
     }
     
     nav {
-    font-family:'Monomaniac One', sans-serif;
-    text-align: center; 
-    font-size: 40px;
-    padding: 40px;
-    color:rgb(255, 255, 255);
-    -webkit-text-stroke:2px rgb(225, 23, 23);
-    letter-spacing: 2.5px;
-    display: inline-block; /* Hace que el texto sea un bloque en línea */
-    animation: marquee 15s linear infinite; 
-    
+        font-family:'Monomaniac One', sans-serif;
+        text-align: center; 
+        font-size: 40px;
+        padding: 40px;
+        color:rgb(255, 255, 255);
+        -webkit-text-stroke:2px rgb(225, 23, 23);
+        letter-spacing: 2.5px;
+        display: inline-block; /* Hace que el texto sea un bloque en línea */
+        animation: marquee 15s linear infinite;  
     }
+
     @keyframes marquee {
         0% { transform: translateX(100%); } /* Inicio: texto desplazado 100% hacia la derecha */
         100% { transform: translateX(-100%); } 
     }
-    
     button[name="johto"]{
-    background-color: rgb(255,69,0);
-    color: white;
-    border: 3px, rgb(17, 67, 219);
-    padding: 10px 60px;
-    font-size: 30px;
-    font-family:'Monomaniac One', sans-serif; 
-    margin-bottom: auto; 
-      
+        background-color: rgb(255,69,0);
+        color: white;
+        border: 3px, rgb(17, 67, 219);
+        padding: 10px 60px;
+        font-size: 30px;
+        font-family:'Monomaniac One', sans-serif; 
+        margin-bottom: auto; 
     }
-    
     button[name="kanto"]{
         background-color: rgb(255,69,0);
         color: white;
@@ -121,29 +118,43 @@ header {
     #tarjetas{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        border-radius: 10px;
         border: 1px solid black;
+        border-radius: 5px;
     }
 
-    /*.tarjeta{
-        /*display:flex;
-        flex-direction:row;
-        justify-content:space-between;
-        width: auto;
-        border: 1px solid lightgray;
-        box-shadow: 2px 2px 8px 4px #d3d3d3d1;
-        border-radius:15px;
-        font-family: sans-serif;*/
-        /*max-width: 65vw;
-        margin: 48px auto;
-        display: block;
-        border-radius: 10px;
-        border: 1px solid black;
-        overflow: hidden;
-        display: grid;
+    .pokemon-card{
+        text-align: center;
+        border: 1px solid;
+        border-radius: 5px;
+        /*flex-wrap: nowrap;*/
+        background-color: rgba(247, 255, 128, 0.637);
     }
 
-    .imagenPkn{
-        width: 100%;
-        object-fit: cover;
-    }*/
+    .textoFrente{
+        text-align: center;
+        font-family:'Monomaniac One', sans-serif;
+    }
+    .textoReverso{
+        font-family:'Monomaniac One', sans-serif;
+    }
+
+    #botones{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+    }
+    .iconoAnterior{
+        padding: 0;
+        border: none;
+        display: inline-block;
+        width: 64px; 
+        height: 64px;
+        background-image: url(assets/atras64.png);
+    }    
+    .iconoSiguiente{
+        display: inline-block;
+        width: 64px; 
+        height: 64px;
+        background-image: url(assets/adelante64.png);
+    }
