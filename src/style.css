@@ -107,13 +107,6 @@ header {
         justify-content:space-between; 
         height: 100px;
     }
-    
-    .hide {
-        display: none;
-    }
-    .show {
-        display: block;
-    }
 
     #tarjetas{
         display: grid;
@@ -145,8 +138,6 @@ header {
         border: none;
     }
     .iconoAnterior{
-        padding: 0;
-        border: none;
         display: inline-block;
         width: 64px; 
         height: 64px;

@@ -8,10 +8,12 @@ let numeroPagina = 1; //llevar el conteo de páginas
 //asignamos la referencia a los botones
 const btnSiguiente = document.getElementById("btnSiguiente");
 const btnAnterior = document.getElementById("btnAnterior");
+
 //escuchamos el evento para realizar el cambio de paginas en las funciones correspondientes
 btnSiguiente.addEventListener("click", pagSiguiente); 
 btnAnterior.addEventListener("click", pagAnterior);
 //funcion para cargar las paginas
+
 function muestraPagina(pagina) {
   //limpiamos cada vez que entra, para mostrar informacion nueva
   tarjetas.innerHTML = "";
@@ -35,10 +37,11 @@ function muestraPagina(pagina) {
   //<picture><img src = ${data.pokemon[i].img}><figcaption>
   //${numeroPkn}<br>${nombrePkn}</br><br>${pesoAltPkn}</br></figcaption></picture>
   for(let i = inicio; i < fin; i++) {
+    //console.log(data.pokemon[i].type);
     const numPkn = document.createTextNode("No. " + data.pokemon[i].num);
     const nombrePkn = document.createTextNode((data.pokemon[i].name).toUpperCase());
-    const altPkn = document.createTextNode("Altura: " + (data.pokemon[i].size.height));
-    const pesoPkn = document.createTextNode("Peso: " + (data.pokemon[i].size.weight));
+    const altPkn = document.createTextNode("Height: " + (data.pokemon[i].size.height));
+    const pesoPkn = document.createTextNode("Weight: " + (data.pokemon[i].size.weight));
     const picture = document.createElement('picture');
     picture.classList = 'pokemon-card';
     const img = document.createElement('img');
