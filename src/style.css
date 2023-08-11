@@ -1,69 +1,71 @@
 header {
-    font-family: 'Black Han Sans', sans-serif;
-    font-size: 60px;
+font-family: 'Black Han Sans', sans-serif;
+font-size: 60px;
+text-align: center; 
+padding: 15px;
+color:rgb(255,215,0);
+-webkit-text-stroke:2px rgb(17, 67, 219);
+letter-spacing: 2.5px;
+}
+
+nav {
+    font-family: 'Inconsolata', monospace;
     text-align: center; 
-    padding: 15px;
-    color:rgb(255,215,0);
-    -webkit-text-stroke:2px rgb(17, 67, 219);
-    letter-spacing: 2.5px;
+    padding: 30px;
     }
-    
-    nav {
-        font-family: 'Inconsolata', monospace;
-        text-align: center; 
-        padding: 30px;
-        }
-    
-      
-    body {
-        background-image: url("https://fondosmil.com/fondo/21794.png");
-        background-size: auto;
-        background-repeat: no-repeat; 
-    }  
-    
-    img {
-        width: auto;
-        height: 90px;
-        margin: 10px;
-        padding: 10px
-    }
-    
-    nav {
-    font-family:'Monomaniac One', sans-serif;
-    text-align: center; 
-    font-size: 40px;
-    padding: 40px;
-    color:rgb(255, 255, 255);
-    -webkit-text-stroke:2px rgb(225, 23, 23);
-    letter-spacing: 2.5px;
-    display: inline-block; /* Hace que el texto sea un bloque en línea */
-    animation: marquee 15s linear infinite; 
-    
-    }
-    @keyframes marquee {
-        0% { transform: translateX(100%); } /* Inicio: texto desplazado 100% hacia la derecha */
-        100% { transform: translateX(-100%); } 
-    }
-    
-    button[name="johto"]{
+
+  
+body {
+    background-image: url("https://cutewallpaper.org/21/pokemon-grass-background/Pokemon-forest-by-BlazingIfrit-Fur-Affinity-dot-net.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+}  
+
+img {
+    width: auto;
+    height: 90px;
+    margin: 10px;
+    padding: 10px
+}
+
+nav {
+font-family:'Monomaniac One', sans-serif;
+text-align: center; 
+font-size: 40px;
+padding: 40px;
+color:rgb(255, 255, 255);
+-webkit-text-stroke:2px rgb(225, 23, 23);
+letter-spacing: 2.5px;
+display: inline-block; /* Hace que el texto sea un bloque en línea */
+animation: marquee 15s linear infinite; 
+
+}
+@keyframes marquee {
+    0% { transform: translateX(100%); } /* Inicio: texto desplazado 100% hacia la derecha */
+    100% { transform: translateX(-100%); } 
+}
+
+button[name="johto"]{
+background-color: rgb(255,69,0);
+color: white;
+border: 3px, rgb(17, 67, 219);
+padding: 10px 60px;
+font-size: 30px;
+font-family:'Monomaniac One', sans-serif; 
+margin-bottom: auto; 
+  
+}
+
+button[name="kanto"]{
     background-color: rgb(255,69,0);
     color: white;
     border: 3px, rgb(17, 67, 219);
     padding: 10px 60px;
+    font-family:'Monomaniac One', sans-serif;
     font-size: 30px;
-    font-family:'Monomaniac One', sans-serif; 
-    margin-bottom: auto; 
-      
-    }
+    margin-bottom: auto;
     
-    button[name="kanto"]{
-        background-color: rgb(255,69,0);
-        color: white;
-        border: 3px, rgb(17, 67, 219);
-        padding: 10px 60px;
-        font-family:'Monomaniac One', sans-serif;
-        font-size: 30px;
-        margin-bottom: auto;    
+        
     }
     
     .container {
@@ -110,14 +112,8 @@ header {
         justify-content:space-between; 
         height: 100px;
     }
-    
-    .hide {
-        display: none;
-    }
-    .show {
-        display: block;
-    }
 
+    
     #tarjetas{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
