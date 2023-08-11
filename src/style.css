@@ -16,8 +16,8 @@ nav {
 
   
 body {
-    background-image: url("https://fondosmil.com/fondo/21794.png");
-    background-size: auto;
+    background-image: url("https://cutewallpaper.org/21/pokemon-grass-background/Pokemon-forest-by-BlazingIfrit-Fur-Affinity-dot-net.jpg");
+    background-size: cover;
     background-repeat: no-repeat; 
 }  
 
@@ -112,14 +112,8 @@ button[name="kanto"]{
         justify-content:space-between; 
         height: 100px;
     }
-    
-    .hide {
-        display: none;
-    }
-    .show {
-        display: block;
-    }
 
+    
     #tarjetas{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
