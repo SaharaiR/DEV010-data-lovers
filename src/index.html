@@ -30,9 +30,9 @@
         <img name= "img-johto" src="https://images.wikidexcdn.net/mwuploads/wikidex/thumb/f/fe/latest/20180203062443/Johto_HGSS.png/428px-Johto_HGSS.png" alt="Región Johto" title="Región Johto">
       </figure>
     </main>
-    <div id = "barraFiltros"> </div>
-    <label for="categoria">Filtrar por categoría:</label>
-        <select id="categoria">
+    <div id = "barraFiltros" style="display:none"> 
+    <label for="categorytype">Category:type</label>
+        <select id="categoria1">
             <option value="steel">Steel</option>
             <option value="water">Water</option>
             <option value="bug">Bug</option>
@@ -50,7 +50,19 @@
             <option value="ground">Ground</option>
             <option value="flying">Fairy</option>
         </select>
-        <button id="filtrar">Filtrar</button>
+        <label for="categoryGeneration">Category:generation</label>
+        <select id="categoria2">
+            <option value="generation(I)">Generation(I)</option>
+            <option value="generation(II)">Generation(II)</option>
+        </select>
+        <label for="categoriaRarity">Category:Rarity</label>
+        <select id="categoria3">
+            <option value="raritynormal">Normal</option>
+            <option value="raritylegendary">Legendary</option>
+            <option value="raritymythic">Mythic</option>
+        </select>
+      </div>
+        <button id="filtrar">Filter</button>
     <div id="root">
       <div id ="tarjetas"style="display:none" class="resultado"></div>
       <button id="btnAnterior">Anterior</button>
