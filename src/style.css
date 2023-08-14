@@ -151,12 +151,15 @@ button[name="kanto"]{
         height: 68px;
         background-image: url(assets/cambiarRegion64.png);
     }
-    .iconoAnterior:hover{
-        background-color: rgba(255, 0, 0, 0.445);
-    } 
-    .iconoSiguiente:hover{
+    .iconoAnterior:hover, .iconoAnterior:hover{
         background-color: rgba(255, 0, 0, 0.445);
     } 
     #cambioRegion:hover{
-        background-color: rgba(255, 0, 0, 0.445);
+        background-color: rgba(251, 255, 0, 0.445);
+    }
+    #buscar{
+        width: 68px;
+        height: 24px;
+        background-image: url(assets/gotcha32.png);
+        border-radius: 5px;
     }
