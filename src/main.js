@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnCambio.style.display = "block";
     // Mostrar las tarjetas y ocultar el inicio
     //document.getElementById("marquesina").style.display = "none";
+    document.getElementById("barraFiltros").style.display = "block";
     btnAnterior.style.display = "inline-block";
     btnSiguiente.style.display = "inline-block";
   }
@@ -139,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("cambioRegion").style.display = "block";  
     // Mostrar las tarjetas y ocultar el inicio
     //document.getElementById("marquesina").style.display = "none";
+    document.getElementById("barraFiltros").style.display = "block";
     btnAnterior.style.display = "inline-block";
     btnSiguiente.style.display = "inline-block";
   }
