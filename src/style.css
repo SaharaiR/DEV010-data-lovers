@@ -6,29 +6,22 @@ header {
     color:rgb(255,215,0);
     -webkit-text-stroke:2px rgb(17, 67, 219);
     letter-spacing: 2.5px;
-    }
-    
-    nav {
-        font-family: 'Inconsolata', monospace;
-        text-align: center; 
-        padding: 30px;
-        }
-    
-      
-    body {
-        background-image: url("https://cutewallpaper.org/21/pokemon-grass-background/Pokemon-forest-by-BlazingIfrit-Fur-Affinity-dot-net.jpg");
-        background-size: cover;
-        background-repeat: no-repeat; 
-    }  
-    
-    img {
-        width: auto;
-        height: 90px;
-        margin: 10px;
-        padding: 10px
-    }
-    
-    nav {
+}
+  
+body {
+    background-image: url("https://cutewallpaper.org/21/pokemon-grass-background/Pokemon-forest-by-BlazingIfrit-Fur-Affinity-dot-net.jpg");
+    background-size: cover;
+    background-repeat: no-repeat; 
+}  
+
+img {
+    width: auto;
+    height: 90px;
+    margin: 10px;
+    padding: 10px
+}
+
+nav {
     font-family:'Monomaniac One', sans-serif;
     text-align: center; 
     font-size: 40px;
@@ -38,40 +31,38 @@ header {
     letter-spacing: 2.5px;
     display: inline-block; /* Hace que el texto sea un bloque en línea */
     animation: marquee 15s linear infinite; 
-    
-    }
-    @keyframes marquee {
-        0% { transform: translateX(100%); } /* Inicio: texto desplazado 100% hacia la derecha */
-        100% { transform: translateX(-100%); } 
-    }
-    
-    button[name="johto"]{
+}
+@keyframes marquee {
+    0% { transform: translateX(100%); } /* Inicio: texto desplazado 100% hacia la derecha */
+    100% { transform: translateX(-100%); } 
+}
+
+button[name="johto"]{
     background-color: rgb(255,69,0);
     color: white;
     border: 3px, rgb(17, 67, 219);
     padding: 10px 60px;
     font-size: 30px;
     font-family:'Monomaniac One', sans-serif; 
-    margin-bottom: auto; 
-      
-    }
+    margin-bottom: auto;  
+}
+
+button[name="kanto"]{
+    background-color: rgb(255,69,0);
+    color: white;
+    border: 3px, rgb(17, 67, 219);
+    padding: 10px 60px;
+    font-family:'Monomaniac One', sans-serif;
+    font-size: 30px;
+    margin-bottom: auto;
+}
     
-    button[name="kanto"]{
-        background-color: rgb(255,69,0);
-        color: white;
-        border: 3px, rgb(17, 67, 219);
-        padding: 10px 60px;
-        font-family:'Monomaniac One', sans-serif;
-        font-size: 30px;
-        margin-bottom: auto;    
-    }
-    
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content:space-around; 
-        height: 100px; 
-    }
+.container {
+    display: flex;
+    align-items: center;
+    justify-content:space-around; 
+    height: 100px; 
+}
     
     .container-img {
         display: flex;
@@ -111,40 +102,61 @@ header {
         height: 100px;
     }
     
-    .hide {
-        display: none;
-    }
-    .show {
-        display: block;
-    }
-
     #tarjetas{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        border-radius: 10px;
         border: 1px solid black;
+        border-radius: 5px;
     }
 
-    
-    /*.tarjeta{
-        /*display:flex;
-        flex-direction:row;
-        justify-content:space-between;
-        width: auto;
-        border: 1px solid lightgray;
-        box-shadow: 2px 2px 8px 4px #d3d3d3d1;
-        border-radius:15px;
-        font-family: sans-serif;*/
-        /*max-width: 65vw;
-        margin: 48px auto;
-        display: block;
-        border-radius: 10px;
-        border: 1px solid black;
-        overflow: hidden;
-        display: grid;
+    .pokemon-card{
+        text-align: center;
+        border: 1px solid;
+        border-radius: 5px;
+        /*flex-wrap: nowrap;*/
+        background-color: rgba(247, 255, 128, 0.637);
     }
 
-    .imagenPkn{
-        width: 100%;
-        object-fit: cover;
-    }*/
+    .textoFrente{
+        text-align: center;
+        font-family:'Monomaniac One', sans-serif;
+        font-size: 18px;
+    }
+    .textoReverso{
+        font-family:'Monomaniac One', sans-serif;
+    }
+
+    #botones{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+    }
+    .iconoAnterior{
+        display: inline-block;
+        width: 64px; 
+        height: 64px;
+        background-image: url(assets/atras64.png);
+        border-radius: 8px;
+    }    
+    .iconoSiguiente{
+        display: inline-block;
+        width: 64px; 
+        height: 64px;
+        background-image: url(assets/adelante64.png);
+        border-radius: 8px;
+    }
+    #cambioRegion{
+        width: 68px;
+        height: 68px;
+        background-image: url(assets/cambiarRegion64.png);
+    }
+    .iconoAnterior:hover{
+        background-color: rgba(255, 0, 0, 0.445);
+    } 
+    .iconoSiguiente:hover{
+        background-color: rgba(255, 0, 0, 0.445);
+    } 
+    #cambioRegion:hover{
+        background-color: rgba(255, 0, 0, 0.445);
+    }
