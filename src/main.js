@@ -1,7 +1,5 @@
 import data from './data/pokemon/pokemon.js';
 document.addEventListener("DOMContentLoaded", function () {
-  
-  //Cargar los botones con la referencia de las tarjetas//
   const pokemonsKanto = 151;//donde termina
   const tarjetas = document.getElementById("tarjetas"); //el div dónde se pondrán las tarjetas
   const tarjetaPorPagina = 25; //definir cuantas tarjetas se presentaran por pagina el grid
@@ -15,10 +13,12 @@ document.addEventListener("DOMContentLoaded", function () {
   btnSiguiente.addEventListener("click", pagSiguiente); 
   btnAnterior.addEventListener("click", pagAnterior);
   let numeroPagina = 1; //llevar el conteo de páginas
+ 
   // Función para cargar los Pokémon de Kanto
   function cargarPokemonesKanto(pagina) {
     // Limpiamos el contenido existente en las tarjetas
     tarjetas.innerHTML = "";
+    //escuchamos el evento para realizar el cambio de paginas en las funciones correspondientes
     
     const inicioIndice = (pagina - 1) * tarjetaPorPagina;
     const fin = Math.min(inicio + tarjetaPorPagina, pokemonsKanto);
@@ -55,6 +55,22 @@ document.addEventListener("DOMContentLoaded", function () {
     // Mostrar las tarjetas y ocultar el inicio
     tarjetas.style.display = "block";
     inicio.style.display = "none";
+    btnAnterior.style.display = "block";
+    btnSiguiente.style.display = "block";
+    cargarPokemonesKanto(numeroPagina);
+  } 
+  function pagSiguiente() {
+    //sirve para limitar el numero de paginas para Kango son 151 pokemons y se necesitan 6 paginas
+    const numPokemonsKanto = 151; 
+    //para Johto son 100 pokemons a mostrar y se necesitan 4 paginas
+    if(numeroPagina === Math.ceil(numPokemonsKanto / tarjetaPorPagina)){
+    //if(numeroPagina === Math.ceil(numPokemonsJohto / tarjetaPorPagina)){
+      return;
+    }
+    //sino aumenta el numero de pagina
+    numeroPagina++;
+    //muestraPagina(numeroPagina); 
+    cargarPokemonesKanto(numeroPagina);
   }
   //funcion para pagina anterior
   function pagAnterior() {
