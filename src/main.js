@@ -1,5 +1,5 @@
 import data from './data/pokemon/pokemon.js';
-
+import dataFunction from './data.js';
 
 document.addEventListener("DOMContentLoaded", function () {
   const botonKanto = document.getElementById("mostrar-tarjetas-kanto");
@@ -149,52 +149,51 @@ document.addEventListener("DOMContentLoaded", function () {
         tarjetasFiltro(inicioFiltros, finFiltros);
       }
       break;
+    } 
+  }
+  //});
+
+  // main.js
+  const filterGenerationSelect = document.getElementById("categoria2");
+  const filtrarButton = document.getElementById("filtrar");
+  const cardsDiv = document.getElementById("tarjetas"); 
+  const typeSelect = document.getElementById("categoria1"); 
+  const raritySelect = document.getElementById("categoria3");
+
+  function createPokemonCard(pokemon) {
+    const cardElement = document.createElement("div");
+    cardElement.textContent = `${pokemon.num} - ${pokemon.name}`;
+    return cardElement;
+  }
+
+  function displayResults(pokemons) {
+    cardsDiv.innerHTML = "";
+
+    for (const pokemon of pokemons) {
+      const cardElement = createPokemonCard(pokemon);
+      cardsDiv.appendChild(cardElement);
     }
   }
-  })
-});
 
-import dataFunction from './data.js';
-// main.js
-const filterGenerationSelect = document.getElementById("categoria2");
-const filtrarButton = document.getElementById("filtrar");
-const cardsDiv = document.getElementById("tarjetas");
-const typeSelect = document.getElementById("categoria1"); 
-const raritySelect = document.getElementById("categoria3");
+  filtrarButton.addEventListener("click", () => {
+    const generationOption = filterGenerationSelect.value;
+    const selectedType = typeSelect.value;
+    const selectedRarity= raritySelect.value;
+    // Llamar a la función de filtrado y pasar los argumentos necesarios
+    const filteredByGeneration = dataFunction.filterGeneration(data.pokemon, generationOption);
+    // Usar la función filterByType para filtrar los Pokémon por tipo
+    const filteredByType = dataFunction.filterByType(data.pokemon, selectedType);
+    // Mostrar los resultados filtrados en el DOM
+    const filterByRarity = dataFunction.filterByRarity(data.pokemon,selectedRarity);
+    //displayResults(filteredByType, filteredByGeneration , filterByRarity);
 
-function createPokemonCard(pokemon) {
-  const cardElement = document.createElement("div");
-  cardElement.textContent = `${pokemon.num} - ${pokemon.name}`;
-  return cardElement;
-}
-
-function displayResults(pokemons) {
-  cardsDiv.innerHTML = "";
-
-  for (const pokemon of pokemons) {
-    const cardElement = createPokemonCard(pokemon);
-    cardsDiv.appendChild(cardElement);
-  }
-}
-
-filtrarButton.addEventListener("click", () => {
-  const generationOption = filterGenerationSelect.value;
-  const selectedType = typeSelect.value;
-  const selectedRarity= raritySelect.value;
-  // Llamar a la función de filtrado y pasar los argumentos necesarios
-  const filteredByGeneration = dataFunction.filterGeneration(data.pokemon, generationOption);
-  // Usar la función filterByType para filtrar los Pokémon por tipo
-  const filteredByType = dataFunction.filterByType(data.pokemon, selectedType);
-  // Mostrar los resultados filtrados en el DOM
-  const filterByRarity = dataFunction.filterByRarity(data.pokemon,selectedRarity);
-  displayResults(filteredByType, filteredByGeneration , filterByRarity);
-
-  console.log("Botón de filtro clickeado");
-  console.log("Generación seleccionada:", generationOption);
-  console.log("Tipo seleccionado:", selectedType);
-  console.log("Generation:", filteredByGeneration);
-  console.log("Rarity:",filterByRarity)
-});
+    console.log("Botón de filtro clickeado");
+    console.log("Generación seleccionada:", generationOption);
+    console.log("Tipo seleccionado:", selectedType);
+    console.log("Indices", filteredByType);
+    console.log("Generation:", filteredByGeneration);
+    console.log("Rarity:",filterByRarity);
+  });
 
   function tarjetasFiltro(inicioF, finF){
     if(botonPresionado === "descendente"){
