@@ -156,35 +156,39 @@ document.addEventListener("DOMContentLoaded", function () {
   // main.js
   const filterGenerationSelect = document.getElementById("categoria2");
   const filtrarButton = document.getElementById("filtrar");
-  const cardsDiv = document.getElementById("tarjetas"); 
+  //const cardsDiv = document.getElementById("tarjetas"); 
   const typeSelect = document.getElementById("categoria1"); 
   const raritySelect = document.getElementById("categoria3");
 
-  function createPokemonCard(pokemon) {
+  /*function createPokemonCard(pokemon) {
     const cardElement = document.createElement("div");
     cardElement.textContent = `${pokemon.num} - ${pokemon.name}`;
     return cardElement;
-  }
+  }*/
 
-  function displayResults(pokemons) {
+  /*function displayResults(pokemons) {
     cardsDiv.innerHTML = "";
 
     for (const pokemon of pokemons) {
       const cardElement = createPokemonCard(pokemon);
       cardsDiv.appendChild(cardElement);
     }
-  }
+  }*/
 
   filtrarButton.addEventListener("click", () => {
     const generationOption = filterGenerationSelect.value;
     const selectedType = typeSelect.value;
     const selectedRarity= raritySelect.value;
     // Llamar a la función de filtrado y pasar los argumentos necesarios
-    const filteredByGeneration = dataFunction.filterGeneration(data.pokemon, generationOption);
+    const filteredByGeneration = dataFunction.filterGeneration(data.pokemon, generationOption);-
+    arraysFiltrados(filteredByGeneration);
     // Usar la función filterByType para filtrar los Pokémon por tipo
     const filteredByType = dataFunction.filterByType(data.pokemon, selectedType);
+    arraysFiltrados(filteredByType);
     // Mostrar los resultados filtrados en el DOM
     const filterByRarity = dataFunction.filterByRarity(data.pokemon,selectedRarity);
+
+    arraysFiltrados(filterByRarity);
     //displayResults(filteredByType, filteredByGeneration , filterByRarity);
 
     console.log("Botón de filtro clickeado");
@@ -244,6 +248,32 @@ document.addEventListener("DOMContentLoaded", function () {
         picture.appendChild(figCaption);
         tarjetas.appendChild(picture);
       }
+    }
+  }
+
+  function arraysFiltrados(arrayF){
+    for(let i = 0; i < arrayF.lenght; i++) {
+      //console.log(data.pokemon[i].type);
+      const numPkn = document.createTextNode("No. " + data.pokemon[i].num);
+      const nombrePkn = document.createTextNode((data.pokemon[i].name).toUpperCase());
+      const altPkn = document.createTextNode("Height: " + (data.pokemon[i].size.height));
+      const pesoPkn = document.createTextNode("Weight: " + (data.pokemon[i].size.weight));
+      const picture = document.createElement('picture');
+      picture.classList = 'pokemon-card';
+      const img = document.createElement('img');
+      img.src = data.pokemon[i].img;
+      picture.appendChild(img);
+      const figCaption = document.createElement('figcaption');
+      figCaption.classList = 'textoFrente';
+      figCaption.appendChild(numPkn);
+      figCaption.appendChild(document.createElement('br'));
+      figCaption.appendChild(nombrePkn);
+      figCaption.appendChild(document.createElement('br'));
+      figCaption.appendChild(altPkn);
+      figCaption.appendChild(document.createElement('br'));
+      figCaption.appendChild(pesoPkn);
+      picture.appendChild(figCaption);
+      tarjetas.appendChild(picture);
     }
   }
 });
