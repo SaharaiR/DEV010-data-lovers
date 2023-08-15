@@ -1,9 +1,26 @@
 // estas funciones son de ejemplo
+const dataFunction = {
+  filterGeneration: (data, generation) => { 
+    const filteredPokemons = data.filter(pokemon => {
+      return pokemon.generation.num.toLowerCase() === generation.toLowerCase();
+    });
+    return filteredPokemons;
+  },
 
-export const example = () => {
-  return 'example';
-};
+  
+  filterByType: (pokemons, selectedType) => {
+    return pokemons.filter(pokemon => {
+      return pokemon.type.includes(selectedType);
+    });
+  },
 
-export const anotherExample = () => {
-  return 'OMG';
-};
+  filterByRarity: (pokemons, selectedRarity) => {
+    return pokemons.filter(pokemon => pokemon['pokemon-rarity'] === selectedRarity);
+  },
+  
+}; 
+export default dataFunction;
+
+
+// const anotherExample = () => {
+// return 'OMG';
