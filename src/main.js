@@ -1,8 +1,9 @@
 import data from './data/pokemon/pokemon.js';
+
 document.addEventListener("DOMContentLoaded", function () {
-  
-  //Cargar los botones con la referencia de las tarjetas//
-  const pokemonsKanto = 151;//donde termina
+  const botonKanto = document.getElementById("mostrar-tarjetas-kanto");
+  const botonJohto = document.getElementById("mostrar-tarjetas-johto");
+  const inicio = document.querySelector(".inicio");
   const tarjetas = document.getElementById("tarjetas"); //el div dónde se pondrán las tarjetas
   const marquesina = document.getElementById("marquesina");
   const btnSiguiente = document.getElementById("btnSiguiente");
@@ -24,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   btnSiguiente.addEventListener("click", pagSiguiente); 
   btnAnterior.addEventListener("click", pagAnterior);
-  let numeroPagina = 1; //llevar el conteo de páginas
   // Función para cargar los Pokémon de Kanto
   function cargarPokemonesKanto(pagina){
     marquesina.innerHTML = "Kanto Region";
@@ -63,10 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Mostrar el botón "return"
     btnCambio.style.display = "block";
     // Mostrar las tarjetas y ocultar el inicio
-    tarjetas.style.display = "block";
-    inicio.style.display = "none";
-    cargarPokemonesKanto(numeroPagina);
-  } 
+    //document.getElementById("marquesina").style.display = "none";
+    document.getElementById("barraFiltros").style.display = "block";
+    btnAnterior.style.display = "inline-block";
+    btnSiguiente.style.display = "inline-block";
+  }
+  //cargarPokemonesKanto(numeroPagina);
   function pagSiguiente() {
     //sirve para limitar el numero de paginas para Kango son 151 pokemons y se necesitan 6 paginas
     const numPokemonsKanto = 151; 
@@ -138,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("cambioRegion").style.display = "block";  
     // Mostrar las tarjetas y ocultar el inicio
     //document.getElementById("marquesina").style.display = "none";
+    document.getElementById("barraFiltros").style.display = "block";
     btnAnterior.style.display = "inline-block";
     btnSiguiente.style.display = "inline-block";
   }
@@ -150,5 +153,52 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })
 });
-//import = data.js;
- 
+
+import dataFunction from './data.js';
+// main.js
+const filterGenerationSelect = document.getElementById("categoria2");
+const filtrarButton = document.getElementById("filtrar");
+const cardsDiv = document.getElementById("tarjetas");
+const typeSelect = document.getElementById("categoria1"); 
+const raritySelect = document.getElementById("categoria3");
+
+function createPokemonCard(pokemon) {
+  const cardElement = document.createElement("div");
+  cardElement.textContent = `${pokemon.num} - ${pokemon.name}`;
+  return cardElement;
+}
+
+function displayResults(pokemons) {
+  cardsDiv.innerHTML = "";
+
+  for (const pokemon of pokemons) {
+    const cardElement = createPokemonCard(pokemon);
+    cardsDiv.appendChild(cardElement);
+  }
+}
+
+filtrarButton.addEventListener("click", () => {
+  const generationOption = filterGenerationSelect.value;
+  const selectedType = typeSelect.value;
+  const selectedRarity= raritySelect.value;
+  // Llamar a la función de filtrado y pasar los argumentos necesarios
+  const filteredByGeneration = dataFunction.filterGeneration(data.pokemon, generationOption);
+  // Usar la función filterByType para filtrar los Pokémon por tipo
+  const filteredByType = dataFunction.filterByType(data.pokemon, selectedType);
+  // Mostrar los resultados filtrados en el DOM
+  const filterByRarity = dataFunction.filterByRarity(data.pokemon,selectedRarity);
+  displayResults(filteredByType, filteredByGeneration , filterByRarity);
+
+  console.log("Botón de filtro clickeado");
+  console.log("Generación seleccionada:", generationOption);
+  console.log("Tipo seleccionado:", selectedType);
+  console.log("Generation:", filteredByGeneration);
+  console.log("Rarity:",filterByRarity)
+});
+
+
+
+
+
+
+
