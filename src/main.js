@@ -136,6 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
   btnReset.addEventListener("click", () => {
     numberPage = 1;
     marquee.innerHTML = "ALL POKEMONS";
+    kanto = false;
+    johto = false;
     btnPush = "ascendent";
     filterArrays(numberPage, data.pokemon);
   });
