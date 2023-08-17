@@ -71,13 +71,13 @@ button[name="kanto"]{
         height: 100px; 
     }
 
-    img [name= "img-kanto"]{
+    img[name= "img-kanto"]{
         border: 3px, rgb(17, 67, 219);
         padding: 40px 60px;
         width: 100px;
     }
     
-    img [name= "img-johto"]{
+    img[name= "img-johto"]{
             border: 3px, rgb(17, 67, 219);
             padding: 40px 60px;
             width: 100px;
@@ -102,19 +102,24 @@ button[name="kanto"]{
         height: 100px;
     }
     
-    #tarjetas{
+    #tarjetas {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Las tarjetas tendrán un ancho mínimo de 150px y se adaptarán al ancho disponible */
+        gap: 10px; /* Espacio de 10px entre las tarjetas */
         border: 1px solid black;
         border-radius: 5px;
+        
     }
-
+    
     .pokemon-card{
         text-align: center;
         border: 1px solid;
         border-radius: 5px;
         /*flex-wrap: nowrap;*/
         background-color: rgba(247, 255, 128, 0.637);
+        cursor: pointer; /* Agregamos un cursor de puntero al pasar sobre la tarjeta */
+        perspective: 2000px; /*efecto 3D*/
+       
     }
 
     .textoFrente{
@@ -124,7 +129,18 @@ button[name="kanto"]{
     }
     .textoReverso{
         font-family:'Monomaniac One', sans-serif;
+       transform: rotateY(180deg);
+        backface-visibility: hidden;
+        transition: transform 0.80s;
+        text-align: center;
+        border: 1px solid;
+        border-radius: 5px;
+        /*flex-wrap: nowrap;*/
+        background-color: rgba(247, 255, 128, 0.637);
+        perspective: 2000px; /*efecto 3D*/
+       
     }
+   
 
     #botones{
         display: flex;
@@ -163,3 +179,10 @@ button[name="kanto"]{
         background-image: url(assets/gotcha.png);
         background-repeat: no-repeat;
     }
+
+    /*  transition: 0.5s;
+        object-fit:cover;
+    }
+    #tarjetas:hover{
+        transform:scale(1.2)
+    } Esto va en las tarjetas, pero primero hay que fragmentarlas*/

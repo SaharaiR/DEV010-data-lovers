@@ -63,8 +63,10 @@ document.addEventListener("DOMContentLoaded", function () {
       kanto = true;
       cargarPokemonesKanto(numeroPagina);
     }
-  })
+  });
 
+ 
+ 
   filtrarButton.addEventListener("click", () => {
     const generationOption = filterGenerationSelect.value;
     const selectedType = typeSelect.value;
@@ -72,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     numeroPagina = 1;
     // Llamar a la función de filtrado y pasar los argumentos necesarios
     filteredByGeneration = dataFunction.filterGeneration(data.pokemon, generationOption);
-    if(filteredByGeneration.length > 0){
+    if(filteredByGeneration.length > 0){//se puso el if porque se jalaban las tres 
       botonPresionado = "generacion";
       arraysFiltrados(numeroPagina, filteredByGeneration);
     }
@@ -87,6 +89,15 @@ document.addEventListener("DOMContentLoaded", function () {
       botonPresionado = "rareza";
       arraysFiltrados(numeroPagina, filterByRarity);
     }
+    /* const combinedFilteredPokemon = dataFunction.combineFilters(
+      data.pokemon,
+      generationOption,
+      selectedType,
+      selectedRarity
+    )
+    arraysFiltrados(numeroPagina, combinedFilteredPokemon);*/
+    //funcion para agregar las funciones de voltear tarjeta//
+  
   });
 
   //FUNCIONES
@@ -121,11 +132,14 @@ document.addEventListener("DOMContentLoaded", function () {
     btnAnterior.style.display = "inline-block";
     btnSiguiente.style.display = "inline-block";
   }
+  
 
   function tarjetasRegion(inicioF, finF){
     if(botonPresionado === "descendente"){
       for(let i = finF - 1; i >= inicioF; i--) {
         //console.log(data.pokemon[i].type);
+        const cardFront= document.createElement('div')
+        cardFront.classList='card-face';
         const numPkn = document.createTextNode("No. " + data.pokemon[i].num);
         const nombrePkn = document.createTextNode((data.pokemon[i].name).toUpperCase());
         const altPkn = document.createTextNode("Height: " + (data.pokemon[i].size.height));
@@ -144,12 +158,20 @@ document.addEventListener("DOMContentLoaded", function () {
         figCaption.appendChild(altPkn);
         figCaption.appendChild(document.createElement('br'));
         figCaption.appendChild(pesoPkn);
-        picture.appendChild(figCaption);
+        const cardBack = document.createElement('div');
+        cardBack.classList = 'card-face flipped';
+        const reversoContenido = crearReversoContenido(data.pokemon[i]['special-attack']);
+        cardBack.appendChild(reversoContenido);
+        picture.appendChild(cardBack)
+        picture.appendChild(cardFront)
         tarjetas.appendChild(picture);
+        
       }
     }else{
       for(let i = inicioF; i < finF; i++) {
         //console.log(data.pokemon[i].type);
+        const cardFront= document.createElement('div')
+        cardFront.classList='card-face';
         const numPkn = document.createTextNode("No. " + data.pokemon[i].num);
         const nombrePkn = document.createTextNode((data.pokemon[i].name).toUpperCase());
         const altPkn = document.createTextNode("Height: " + (data.pokemon[i].size.height));
@@ -169,11 +191,62 @@ document.addEventListener("DOMContentLoaded", function () {
         figCaption.appendChild(document.createElement('br'));
         figCaption.appendChild(pesoPkn);
         picture.appendChild(figCaption);
+        const cardBack = document.createElement('div');
+        cardBack.classList = 'card-face flipped';
+        const reversoContenido = crearReversoContenido(data.pokemon[i]['special-attack']);
+        cardBack.appendChild(reversoContenido);
+        picture.appendChild(cardBack)
+        picture.appendChild(cardFront)
         tarjetas.appendChild(picture);
       }
     }
-  }
+  } 
+  
+  //reverso de tarjetas// 
+  // Función para crear el contenido del reverso de las tarjetas
+  function crearReversoContenido(specialAttacks) {
+    const reversoContenido = document.createElement('div');
+    reversoContenido.classList = 'reverso-contenido';
 
+    specialAttacks.forEach(attack => {
+      const attackName = document.createTextNode("Name: " + attack.name);
+      const attackType = document.createTextNode("Type: " + attack.type);
+      const attackBaseDamage = document.createTextNode("Base Damage: " + attack['base-damage']);
+      const attackEnergy = document.createTextNode("Energy: " + attack.energy);
+      const attackDuration = document.createTextNode("Move Duration: " + attack['move-duration-seg']);
+      const attackInfo = document.createElement('div');
+      attackInfo.classList = 'textoReverso';
+      attackInfo.appendChild(attackName);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackType);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackBaseDamage);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackEnergy);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackDuration);
+
+      reversoContenido.appendChild(attackInfo);
+      reversoContenido.appendChild(document.createElement('hr'));
+    });
+    console.log(reversoContenido);
+    return reversoContenido;
+  }
+  tarjetas.addEventListener('mouseover', (event) => {
+    const tarjeta = event.target.closest('.pokemon-card');
+    if (tarjeta) {
+      tarjeta.classList.add('textoReverso');
+      console.log('Mouse sobre la tarjeta');
+    }
+  });
+  
+  tarjetas.addEventListener('mouseout', (event) => {
+    const tarjeta = event.target.closest('.pokemon-card');
+    if (tarjeta) {
+      tarjeta.classList.remove('textoReverso');
+      console.log('Mouse fuera de la tarjeta');
+    }
+  });
   function pagSiguiente() {
     //sirve para limitar el numero de paginas para Kango son 151 pokemons y se necesitan 6 paginas
     const numPokemonsKanto = 151; 
