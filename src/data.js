@@ -17,10 +17,37 @@ const dataFunction = {
   filterByRarity: (pokemons, selectedRarity) => {
     return pokemons.filter(pokemon => pokemon['pokemon-rarity'] === selectedRarity);
   },
-  
-}; 
+  sortDescendent: (pokemons) => {
+    return pokemons.sort((a, b) => {
+      if (a.num > b.num) {
+        return -1;
+      }
+      if (a.num < b.num) {
+        return 1;
+      }
+      return 0;
+    });
+  },
+  searching: (pokemon, nameOrNumber) => {
+    return pokemon.find(p => {
+      return p.num === nameOrNumber || p.name === nameOrNumber; 
+    });
+  } 
+};
+/* filterCombine: (pokemons, rarity, type, generation) => {
+    //let filtered = pokemons;
+    if(rarity) {
+      //filtered = filtered.filter(p => p['pokemon-rarity'] === rarity);
+      pokemons = pokemons.filter(p => p['pokemon-rarity'] === rarity);
+    }
+    if(type) {
+      pokemons = pokemons.filter(p => p['pokemon-type'] === type);
+      //filtered = filtered.filter(p => p['pokemon-type'] === type); 
+    }
+    if(generation) {
+      pokemons = pokemons.filter(p => p['pokemon-generation'] === generation);
+      //filtered = filtered.filter(p => p['pokemon-generation'] === generation);
+    }
+    return pokemons;
+  }*/ 
 export default dataFunction;
-
-
-// const anotherExample = () => {
-// return 'OMG';
