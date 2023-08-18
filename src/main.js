@@ -136,6 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
   btnReset.addEventListener("click", () => {
     numberPage = 1;
     marquee.innerHTML = "ALL POKEMONS";
+    kanto = false;
+    johto = false;
     btnPush = "ascendent";
     filterArrays(numberPage, data.pokemon);
   });
@@ -357,6 +359,52 @@ document.addEventListener("DOMContentLoaded", function () {
     picture.appendChild(figCaption);
     cards.appendChild(picture);
   }
+  /*function createReverseContent([specialAttacks]) {
+    const reverseContent = document.createElement('div');
+    reverseContent.classList = 'reverse-content';
+
+    specialAttacks.forEach(attack => {
+      const attackName = document.createTextNode("Name: " + attack.name);
+      const attackType = document.createTextNode("Type: " + attack.type);
+      const attackBaseDamage = document.createTextNode("Base Damage: " + attack['base-damage']);
+      const attackEnergy = document.createTextNode("Energy: " + attack.energy);
+      const attackDuration = document.createTextNode("Move Duration: " + attack['move-duration-seg']);
+      
+      const attackInfo = document.createElement('div');
+      attackInfo.classList = 'reverseText';
+      attackInfo.appendChild(attackName);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackType);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackBaseDamage);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackEnergy);
+      attackInfo.appendChild(document.createElement('br'));
+      attackInfo.appendChild(attackDuration);
+
+      reverseContent.appendChild(attackInfo);
+      reverseContent.appendChild(document.createElement('hr'));
+    });
+    console.log(reverseContent);
+    return reverseContent;
+  }*/
+
+  cards.addEventListener('mouseover', (event) => {
+    const card = event.target.closest('.pokemon-card');
+    if (card) {
+      card.classList.add('reverse-content');
+    }
+  });
+  
+  cards.addEventListener('mouseout', (event) => {
+    const card = event.target.closest('.pokemon-card');
+    if (card) {
+      card.classList.remove('reverse-content');
+    }
+  });
+  
+  
+  
   /*function arrayGeneration(pagina, arrayF){
     tarjetas.innerHTML = "";
     longArrayF = arrayF.length;
