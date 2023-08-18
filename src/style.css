@@ -249,7 +249,7 @@ button[name="kanto"]{
         cursor: pointer;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    .etiqueta-formulario {
+    .formlabel {
         background-color:  rgba(186, 189, 19, 0.959);
         font-family:'Monomaniac One', sans-serif; 
         border-radius: 8px;
