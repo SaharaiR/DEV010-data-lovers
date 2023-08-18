@@ -30,11 +30,11 @@ nav {
     -webkit-text-stroke:2px rgb(225, 23, 23);
     letter-spacing: 2.5px;
     display: inline-block; /* Hace que el texto sea un bloque en línea */
-    animation: marquee 15s linear infinite; 
+    animation: marquee 8s linear infinite; 
 }
 @keyframes marquee {
-    0% { transform: translateX(100%); } /* Inicio: texto desplazado 100% hacia la derecha */
-    100% { transform: translateX(-100%); } 
+    0% { transform: translateX(100%); } 
+    100% { transform: translateX(0%); } 
 }
 
 button[name="johto"]{
@@ -45,6 +45,9 @@ button[name="johto"]{
     font-size: 30px;
     font-family:'Monomaniac One', sans-serif; 
     margin-bottom: auto;  
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button[name="kanto"]{
@@ -55,6 +58,9 @@ button[name="kanto"]{
     font-family:'Monomaniac One', sans-serif;
     font-size: 30px;
     margin-bottom: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
     
 .container {
@@ -71,13 +77,13 @@ button[name="kanto"]{
         height: 100px; 
     }
 
-    img[name= "img-kanto"]{
+    img [name= "img-kanto"]{
         border: 3px, rgb(17, 67, 219);
         padding: 40px 60px;
         width: 100px;
     }
     
-    img[name= "img-johto"]{
+    img [name= "img-johto"]{
             border: 3px, rgb(17, 67, 219);
             padding: 40px 60px;
             width: 100px;
@@ -93,6 +99,7 @@ button[name="kanto"]{
         letter-spacing: 2.5px;  
         align-items:center;
         background-color: rgb(255,215,0);
+        border-radius: 8px;
     }
     
     .img-pokemon1{
@@ -102,15 +109,16 @@ button[name="kanto"]{
         height: 100px;
     }
     
-    #tarjetas {
+    #cards{
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Las tarjetas tendrán un ancho mínimo de 150px y se adaptarán al ancho disponible */
         gap: 10px; /* Espacio de 10px entre las tarjetas */
         border: 1px solid black;
         border-radius: 5px;
+       
         
     }
-    
+
     .pokemon-card{
         text-align: center;
         border: 1px solid;
@@ -119,70 +127,130 @@ button[name="kanto"]{
         background-color: rgba(247, 255, 128, 0.637);
         cursor: pointer; /* Agregamos un cursor de puntero al pasar sobre la tarjeta */
         perspective: 2000px; /*efecto 3D*/
-       
     }
 
-    .textoFrente{
+    .frontText{
         text-align: center;
         font-family:'Monomaniac One', sans-serif;
         font-size: 18px;
     }
-    .textoReverso{
-        font-family:'Monomaniac One', sans-serif;
-       transform: rotateY(180deg);
-        backface-visibility: hidden;
+    .reverse-content{
+        transform: rotateY(180deg);
+        backface-visibility: show;
         transition: transform 0.80s;
+        perspective: 2000px; /*efecto 3D*/
+        background-color: rgba(247, 255, 128, 0.637);
+       
+        
+
+    }
+    .reverseText{
+        font-family:'Monomaniac One', sans-serif;
         text-align: center;
         border: 1px solid;
         border-radius: 5px;
         /*flex-wrap: nowrap;*/
         background-color: rgba(247, 255, 128, 0.637);
-        perspective: 2000px; /*efecto 3D*/
+        backface-visibility: show;
        
     }
-   
 
-    #botones{
+    #buttons{
         display: flex;
         justify-content: center;
         align-items: center;
         border: none;
     }
-    .iconoAnterior{
+    .nextIcon{
         display: inline-block;
         width: 64px; 
         height: 64px;
         background-image: url(assets/atras64.png);
         border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }    
-    .iconoSiguiente{
+    .previousIcon{
         display: inline-block;
         width: 64px; 
         height: 64px;
         background-image: url(assets/adelante64.png);
         border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    #cambioRegion{
+    #changeRegion{
         width: 68px;
         height: 68px;
         background-image: url(assets/cambiarRegion64.png);
     }
-    .iconoAnterior:hover, .iconoSiguiente:hover{
+    .nextIcon:hover, .previousIcon:hover{
         background-color: rgba(255, 0, 0, 0.445);
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     } 
-    #cambioRegion:hover{
+    #changeRegion:hover{
         background-color: rgba(251, 255, 0, 0.445);
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    #buscar{
+    #search{
         width: 68px;
         height: 24px;
         background-image: url(assets/gotcha.png);
         background-repeat: no-repeat;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
+    #filterBar {
+    display: flex;
+    justify-content:center;
+    background-color: rgba(251, 255, 0, 0.445);
+    padding:10px; 
+    font-family:'Monomaniac One', sans-serif;
+    border-radius: 8px;
+    }
+    #filter {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+    }
+    #btnAscendent {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-    /*  transition: 0.5s;
-        object-fit:cover;
     }
-    #tarjetas:hover{
-        transform:scale(1.2)
-    } Esto va en las tarjetas, pero primero hay que fragmentarlas*/
+    #btnDescendent {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    #resetFilters {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .etiqueta-formulario {
+        background-color:  rgba(186, 189, 19, 0.959);
+        font-family:'Monomaniac One', sans-serif; 
+        border-radius: 8px;
+    }

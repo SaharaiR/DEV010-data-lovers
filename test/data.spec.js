@@ -1,5 +1,5 @@
 import { example, anotherExample } from '../src/data.js';
-
+/*import dataFunction from './data.js';*/
 
 describe('example', () => {
   it('is a function', () => {
