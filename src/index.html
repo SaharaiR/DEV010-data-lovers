@@ -30,7 +30,7 @@
     </main>
     <div id = "filterBar" style="display: none;">
       <label for="categorytype">Type</label>
-        <select id="category1" class="formlabel">
+        <select id="categorytype" class="formlabel">
             <option value="cero">---</option>
             <option value="steel">Steel</option>
             <option value="water">Water</option>
@@ -51,32 +51,33 @@
             <option value="poison">Poison</option>
             <option value="flying">Fairy</option>
         </select>
-        <label for="categoryGeneration" >Generation</label>
-        <select id="category2" class="formlabel">
+        <label for="categoryGeneration">Generation</label>
+        <select id="categoryGeneration" class="formlabel">
             <option value="cero">---</option>
             <option value="generation i">Generation(i)</option>
             <option value="generation ii">Generation(ii)</option>
         </select>
-        <label for="categoriaRarity">Rarity</label>
-        <select id="category3" class="formlabel">
+        <label for="categoryRarity">Rarity</label>
+        <select id="categoryRarity" class="formlabel">
             <option value="cero">---</option>
             <option value="normal">Normal</option>
             <option value="legendary">Legendary</option>
             <option value="mythic">Mythic</option>
         </select>
         <button id="filter">Filter</button>
-        <label>SORT BY:</label>
+        <span>SORT BY:</span>
         <button id="btnAscendent">Ascendent</button>
         <button id="btnDescendent">Descendent</button>
         <input id="valueSearch" class="formlabel" placeholder="Search by name or pokemon number...">
         <button id="search"></button>
         <button id = "resetFilters">Reset Filters</button>
-        <label id = "alerts"></label>
+        <span id = "alerts"></span>
     </div>
     <br>
     <div id="root">
-      <div id = "cards"></div><br>
-       <div class="reverse-content"></div>
+    
+      <div id = "cards" style="display: none;"></div>
+
       <div id = "buttons">
         <button id="btnPrev" style = "display: none;" title="Previous page"><span class = "nextIcon"></span></button>
         <button id="btnNext" style = "display: none;" title="Next page"><span class = "previousIcon"></span></button>
