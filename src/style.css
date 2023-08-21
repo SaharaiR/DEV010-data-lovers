@@ -103,17 +103,40 @@ button[name="kanto"]{
     }
     
     #cards{
+        /*position: absolute;*/
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        
+        backface-visibility: hidden;
+        transition: 5s;
+    }
+
+    #frontCards, #backCards{
+        
         border: 1px solid black;
         border-radius: 5px;
+    }
+
+    #frontCards{
+        grid-template-columns: repeat(5, 1fr);
+        transform: perspective(500px) rotateY(0deg);
+    }
+
+    #backCards{
+        transform: perspective(500px) rotateY(180deg);
+    }
+
+    .reverse{
+        transform: perspective(500px) rotateY(180deg);
+    }
+
+    .reverseBack{
+        transform: perspective(500px) rotateY(360deg); 
     }
 
     .pokemon-card{
         text-align: center;
         border: 1px solid;
         border-radius: 5px;
-        /*flex-wrap: nowrap;*/
         background-color: rgba(247, 255, 128, 0.637);
     }
 
@@ -124,6 +147,7 @@ button[name="kanto"]{
     }
     .reverseText{
         font-family:'Monomaniac One', sans-serif;
+        font-size: 18px;
     }
 
     #buttons{
@@ -162,4 +186,61 @@ button[name="kanto"]{
         height: 24px;
         background-image: url(assets/gotcha.png);
         background-repeat: no-repeat;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    #filterBar {
+        display: flex;
+        justify-content:center;
+        background-color: rgba(251, 255, 0, 0.445);
+        padding:10px; 
+        font-family:'Monomaniac One', sans-serif;
+        border-radius: 8px;
+    }
+    #filter {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+    }
+    #btnAscendent {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    }
+    #btnDescendent {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    #resetFilters {
+        background-color:  rgba(251, 255, 0, 0.434);
+        background-color: rgb(255,69,0);
+        color: white;
+        border-radius: 8px;
+        font-family:'Monomaniac One', sans-serif; 
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    .formlabel {
+        background-color:  rgba(186, 189, 19, 0.959);
+        font-family:'Monomaniac One', sans-serif; 
+        border-radius: 8px;
+    }
+    #alerts{
+        color: red;
     }

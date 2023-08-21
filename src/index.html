@@ -17,9 +17,7 @@
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/800px-Pokebola-pokeball-png-0.png">
     </section>
     <header>Welcome to this adventure...</header> 
-    <nav id = "marquee">
-      Please select the region
-    </nav> <!--se tiene que arreglar!--> 
+    <nav id = "marquee">Please select the region </nav> 
     <main class ="begin">
       <section class="container"> 
         <button id="showKantoCards" name="kanto">Kanto Region</button>
@@ -31,8 +29,8 @@
       </figure>
     </main>
     <div id = "filterBar" style="display: none;">
-      <label for="categorytype">Type</label>
-        <select id="category1">
+      <label for="categoryType">Type</label>
+        <select id="categoryType" class="formlabel">
             <option value="cero">---</option>
             <option value="steel">Steel</option>
             <option value="water">Water</option>
@@ -54,35 +52,41 @@
             <option value="flying">Fairy</option>
         </select>
         <label for="categoryGeneration">Generation</label>
-        <select id="category2">
+        <select id="categoryGeneration" class="formlabel">
             <option value="cero">---</option>
             <option value="generation i">Generation(i)</option>
             <option value="generation ii">Generation(ii)</option>
         </select>
-        <label for="categoriaRarity">Rarity</label>
-        <select id="category3">
+        <label for="categoryRarity">Rarity</label>
+        <select id="categoryRarity" class="formlabel">
             <option value="cero">---</option>
             <option value="normal">Normal</option>
             <option value="legendary">Legendary</option>
             <option value="mythic">Mythic</option>
         </select>
         <button id="filter">Filter</button>
-        <label>SORT BY:</label>
+        <span>SORT BY:</span>
         <button id="btnAscendent">Ascendent</button>
         <button id="btnDescendent">Descendent</button>
-        <input id="valueSearch" placeholder="Search by name or pokemon number...">
+        <input id="valueSearch" class="formlabel" placeholder="Search by name or pokemon number...">
         <button id="search"></button>
         <button id = "resetFilters">Reset Filters</button>
-        <label id = "alerts"></label>
+        <span id = "alerts"></span>
     </div>
     <br>
     <div id="root">
-      <div id = "cards"></div><br>
-      <div id = "buttons">
-        <button id="btnPrev" style = "display: none;" title="Previous page"><span class = "nextIcon"></span></button>
-        <button id="btnNext" style = "display: none;" title="Next page"><span class = "previousIcon"></span></button>
-      </div>
-      <button id="changeRegion" style="display: none;" title="Change region"></button>
+
+    <div id="cards" style="display: none;">
+      <div id = "frontCards" style="display: none;"></div>
+      <div id = "backCards" style="display: none;"></div>
+    </div>
+    
+    
+    <div id = "buttons">
+      <button id="btnPrev" style = "display: none;" title="Previous page"><span class = "nextIcon"></span></button>
+      <button id="btnNext" style = "display: none;" title="Next page"><span class = "previousIcon"></span></button>
+    </div>
+    <button id="changeRegion" style="display: none;" title="Change region"></button>
     </div> 
     <script src="main.js" type="module"></script>
     <footer>
