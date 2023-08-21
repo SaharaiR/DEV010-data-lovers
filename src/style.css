@@ -110,6 +110,13 @@ button[name="kanto"]{
     }
     
     #cards{
+        /*position: absolute;*/
+        display: grid;        
+        backface-visibility: hidden;
+        transition: 5s;
+    }
+
+    #frontCards, #backCards{
         /*display: grid;*/
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Las tarjetas tendrán un ancho mínimo de 150px y se adaptarán al ancho disponible */
         gap: 10px; /* Espacio de 10px entre las tarjetas */
@@ -119,12 +126,28 @@ button[name="kanto"]{
         /*position: absolute;*/
     }
 
+    #frontCards{
+        grid-template-columns: repeat(5, 1fr);
+        transform: perspective(500px) rotateY(0deg);
+    }
+
+    #backCards{
+        transform: perspective(500px) rotateY(180deg);
+    }
+
+    .reverse{
+        transform: perspective(500px) rotateY(180deg);
+    }
+
+    .reverseBack{
+        transform: perspective(500px) rotateY(360deg); 
+    }
+
     .pokemon-card{
         /*position: absolute;*/
         text-align: center;
         border: 1px solid;
         border-radius: 5px;
-        /*flex-wrap: nowrap;*/
         background-color: rgba(247, 255, 128, 0.637);
         cursor: pointer; /* Agregamos un cursor de puntero al pasar sobre la tarjeta */
         perspective: 2000px; /*efecto 3D*/
@@ -144,6 +167,7 @@ button[name="kanto"]{
     }
     .reverseText{
         font-family:'Monomaniac One', sans-serif;
+        font-size: 18px;
         text-align: center;
         border: 1px solid;
         border-radius: 5px;

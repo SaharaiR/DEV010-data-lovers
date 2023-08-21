@@ -29,8 +29,8 @@
       </figure>
     </main>
     <div id = "filterBar" style="display: none;">
-      <label for="categorytype">Type</label>
-        <select id="categorytype" class="formlabel">
+      <label for="categoryType">Type</label>
+        <select id="categoryType" class="formlabel">
             <option value="cero">---</option>
             <option value="steel">Steel</option>
             <option value="water">Water</option>
@@ -75,9 +75,10 @@
     </div>
     <br>
     <div id="root">
-    
-      <div id = "cards" style="display: none;"></div>
-
+      <div id="cards" style="display: none;">
+        <div id = "frontCards" style="display: none;"></div>
+        <div id = "backCards" style="display: none;"></div>
+      </div>
       <div id = "buttons">
         <button id="btnPrev" style = "display: none;" title="Previous page"><span class = "nextIcon"></span></button>
         <button id="btnNext" style = "display: none;" title="Next page"><span class = "previousIcon"></span></button>
