@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const begin = document.querySelector(".begin");
 
   const frontCards = document.getElementById("frontCards"); //el div dónde se pondrán las tarjetas
-  
+
   const marquee = document.getElementById("marquee");
   const btnNext = document.getElementById("btnNext");
   const btnPrev = document.getElementById("btnPrev");
@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let btnPush = ""; 
 
   //EVENTOS
+  //cards.style.display = "none";
   btnKanto.addEventListener("click", function() {
     kanto = true;
     loadPkm(numberPage); 
@@ -148,6 +149,26 @@ document.addEventListener("DOMContentLoaded", function () {
     btnPush = "ascendent";
     filterArrays(numberPage, data.pokemon);
   });
+  
+  function backCard(){
+    const eachCard = document.querySelectorAll('.pokemon-card')
+    //console.log(eachCard)
+    /*eachCard.forEach((element) => {
+      element.addEventListener('mouseover', (event) => {
+        const card = event.target.closest('.pokemon-card');
+        card.classList.add('reverse-content');
+        //console.log(event.target.id)
+        createReverseContent(event.target.id);
+      });
+
+      // cards.addEventListener('mouseout', (event) => {
+      //   const card = event.target.closest('.pokemon-card');
+      //   if (card) {
+      //     card.classList.remove('reverse-content');
+      //   }
+      // });
+    })*/
+  }
 
   //FUNCIONES
   function loadPkm(page){
@@ -165,9 +186,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const endIndex = indexBegin + cardPerPage;
       cardsByRegion(indexBegin, endIndex);
     }
-    // Limpiamos el contenido existente en las tarjetas
-    //cards.innerHTML = "";
-    //Cargamos demás elementos
     btnPrev.style.display = "inline-block";
     btnNext.style.display = "inline-block";
     btnChangeRegion.style.display = "block";
@@ -181,6 +199,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const heightPkn = document.createTextNode("Height: " + (data.pokemon[i].size.height));
       const weightPkn = document.createTextNode("Weight: " + (data.pokemon[i].size.weight));
       const picture = document.createElement('picture');
+      
+      picture.id= data.pokemon[i].num
       picture.classList = 'pokemon-card';
       const img = document.createElement('img');
       picture.id= data.pokemon[i].num
@@ -364,6 +384,50 @@ document.addEventListener("DOMContentLoaded", function () {
     picture.appendChild(figCaption);
     frontCards.appendChild(picture);
   }
+
+  /*function createReverseContent(numberPokemon) {
+    //console.log(numberPokemon);
+    const reverseContent = document.createElement('div');
+    reverseContent.classList = 'reverse-content';
+
+    data.pokemon.forEach(attack => {
+      if(attack.num === numberPokemon){
+        attack['special-attack'].forEach(attribute =>{
+          //const attackAbout = document.createTextNode("About: " + attack.about);
+          const attackName = document.createTextNode("Name: " + attribute.name);
+          const attackType = document.createTextNode("Type: " + attribute.type);
+          const attackBaseDamage = document.createTextNode("Base Damage: " + attribute['base-damage']);
+          const attackEnergy = document.createTextNode("Energy: " + attribute.energy);
+          const attackDuration = document.createTextNode("Move Duration: " + attribute['move-duration-seg']);
+
+          const attackInfo = document.createElement('p');
+          //attackInfo.classList = 'reverseText';
+          //attackInfo.appendChild(attackAbout);
+          attackInfo.classList = 'pokemon-card';
+          attackInfo.appendChild(attackName);
+          attackInfo.appendChild(document.createElement('br'));
+          attackInfo.appendChild(attackType);
+          attackInfo.appendChild(document.createElement('br'));
+          attackInfo.appendChild(attackBaseDamage);
+          attackInfo.appendChild(document.createElement('br'));
+          attackInfo.appendChild(attackEnergy);
+          attackInfo.appendChild(document.createElement('br'));
+          attackInfo.appendChild(attackDuration);
+          cards.innerHTML = "";
+          //backCards.appendChild("attackInfo");
+          //cards.innerHTML = "";
+          //cards.appendChild(attackInfo);
+
+        reverseContent.appendChild(attackInfo);
+        reverseContent.appendChild(document.createElement('hr'));
+        });
+        //backCards.style.display = "grid";
+        cards.style.display = "grid";
+      }
+    });
+    console.log(reverseContent);
+    return reverseContent;
+  }*/
 
   /*function arrayGeneration(pagina, arrayF){
     tarjetas.innerHTML = "";
