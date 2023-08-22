@@ -385,6 +385,7 @@ document.addEventListener("DOMContentLoaded", function () {
     frontCards.appendChild(picture);
   }
 
+
   /*function createReverseContent(numberPokemon) {
     //console.log(numberPokemon);
     const reverseContent = document.createElement('div');
@@ -427,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     console.log(reverseContent);
     return reverseContent;
-  }*/
+  }
 
   /*function arrayGeneration(pagina, arrayF){
     tarjetas.innerHTML = "";
