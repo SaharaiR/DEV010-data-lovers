@@ -110,20 +110,44 @@ button[name="kanto"]{
     }
     
     #cards{
-        display: grid;
+        /*position: absolute;*/
+        display: grid;        
+        backface-visibility: hidden;
+        transition: 5s;
+    }
+
+    #frontCards, #backCards{
+        /*display: grid;*/
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Las tarjetas tendrán un ancho mínimo de 150px y se adaptarán al ancho disponible */
         gap: 10px; /* Espacio de 10px entre las tarjetas */
         border: 1px solid black;
-        border-radius: 5px;
-       
-        
+        border-radius: 5px; 
+        /*backface-visibility: hidden;*/
+        /*position: absolute;*/
+    }
+
+    #frontCards{
+        grid-template-columns: repeat(5, 1fr);
+        transform: perspective(500px) rotateY(0deg);
+    }
+
+    #backCards{
+        transform: perspective(500px) rotateY(180deg);
+    }
+
+    .reverse{
+        transform: perspective(500px) rotateY(180deg);
+    }
+
+    .reverseBack{
+        transform: perspective(500px) rotateY(360deg); 
     }
 
     .pokemon-card{
+        /*position: absolute;*/
         text-align: center;
         border: 1px solid;
         border-radius: 5px;
-        /*flex-wrap: nowrap;*/
         background-color: rgba(247, 255, 128, 0.637);
         cursor: pointer; /* Agregamos un cursor de puntero al pasar sobre la tarjeta */
         perspective: 2000px; /*efecto 3D*/
@@ -135,24 +159,22 @@ button[name="kanto"]{
         font-size: 18px;
     }
     .reverse-content{
-        transform: rotateY(180deg);
+        transform: rotateY(-180deg);
         backface-visibility: show;
         transition: transform 0.80s;
         perspective: 2000px; /*efecto 3D*/
         background-color: rgba(247, 255, 128, 0.637);
-       
-        
-
     }
     .reverseText{
         font-family:'Monomaniac One', sans-serif;
+        font-size: 18px;
         text-align: center;
         border: 1px solid;
         border-radius: 5px;
         /*flex-wrap: nowrap;*/
         background-color: rgba(247, 255, 128, 0.637);
-        backface-visibility: show;
-       
+        backface-visibility: hidden;
+        /*position: absolute;*/
     }
 
     #buttons{
@@ -203,12 +225,12 @@ button[name="kanto"]{
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     #filterBar {
-    display: flex;
-    justify-content:center;
-    background-color: rgba(251, 255, 0, 0.445);
-    padding:10px; 
-    font-family:'Monomaniac One', sans-serif;
-    border-radius: 8px;
+        display: flex;
+        justify-content:center;
+        background-color: rgba(251, 255, 0, 0.445);
+        padding:10px; 
+        font-family:'Monomaniac One', sans-serif;
+        border-radius: 8px;
     }
     #filter {
         background-color:  rgba(251, 255, 0, 0.434);
@@ -253,4 +275,7 @@ button[name="kanto"]{
         background-color:  rgba(186, 189, 19, 0.959);
         font-family:'Monomaniac One', sans-serif; 
         border-radius: 8px;
+    }
+    #alerts{
+        color: red;
     }
