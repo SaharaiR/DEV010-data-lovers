@@ -1,20 +1,20 @@
 # Data Lovers
 
-## Índice
+## Index
 
-* [1. Preámbulo](#1-preámbulo)
-* [2. Resumen del proyecto](#2-resumen-del-proyecto)
-* [3. Objetivos de aprendizaje](#3-objetivos-de-aprendizaje)
-* [4. Consideraciones generales](#4-consideraciones-generales)
-* [5. Criterios de aceptación mínimos del proyecto](#5-criterios-de-aceptación-mínimos-del-proyecto)
+* [1. Preamble](#1-preamble)
+* [2. Project Summary](#2-Project-Summary)
+* [3. Learning Objectives](#3-Learning-objectives)
+* [4. General Considerations](#4-General-Considerations)
+* [5. Minimum Project Acceptance Criteria](#5-Minimum-Project-Acceptance-Criteria)
 * [6. Hacker edition](#6-hacker-edition)
-* [7. Consideraciones técnicas](#7-consideraciones-técnicas)
-* [8. Pistas, tips y lecturas complementarias](#8-pistas-tips-y-lecturas-complementarias)
+* [7. Technical Considerations](#7-Technical-Considerations)
+* [8. Clues, Tips, and Additional Readings](#8-Clues-Tips-and-Additional-Readings)
 * [9. Checklist](#9-checklist)
 
 ***
 
-## 1. Preámbulo
+## 1. Preamble
 
 Según [Forbes](https://www.forbes.com/sites/bernardmarr/2018/05/21/how-much-data-do-we-create-every-day-the-mind-blowing-stats-everyone-should-read),
 el 90% de la data que existe hoy ha sido creada durante los últimos dos años.
@@ -32,7 +32,7 @@ usuarias, al lado derecho.
 
 ![pokemon-data-to-ui](https://user-images.githubusercontent.com/12631491/218505816-c6d11758-9de4-428f-affb-2a56ea4d68c4.png)
 
-## 2. Resumen del proyecto
+## 2. Project Summary
 
 En este proyecto **construirás una _página web_ para visualizar un
 _conjunto (set) de datos_** que se adecúe a lo que descubras que tu usuario
@@ -105,7 +105,7 @@ El objetivo principal de este proyecto es que aprendas a diseñar y construir un
 interfaz web donde se pueda visualizar y manipular data, entendiendo lo que el
 usuario necesita.
 
-## 3. Objetivos de aprendizaje
+## 3. Learning Objectives
 
 Reflexiona y luego marca los objetivos que has llegado a entender y aplicar en tu proyecto. Piensa en eso al decidir tu estrategia de trabajo.
 

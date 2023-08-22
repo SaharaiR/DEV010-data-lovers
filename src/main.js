@@ -359,7 +359,7 @@ document.addEventListener("DOMContentLoaded", function () {
     picture.appendChild(figCaption);
     cards.appendChild(picture);
   }
-  /*function createReverseContent([specialAttacks]) {
+ function createReverseContent([specialAttacks]) {
     const reverseContent = document.createElement('div');
     reverseContent.classList = 'reverse-content';
 
@@ -387,7 +387,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     console.log(reverseContent);
     return reverseContent;
-  }*/
+  }
 
   cards.addEventListener('mouseover', (event) => {
     const card = event.target.closest('.pokemon-card');

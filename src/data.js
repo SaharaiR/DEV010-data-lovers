@@ -55,7 +55,7 @@ const dataFunction = {
       });
     }
   
-    return filteredPokemons;*/
+    return filteredPokemons;
 }
   
 /*filterCombine: (pokemons, rarity, type, generation) => {
@@ -74,6 +74,6 @@ const dataFunction = {
     }
     return pokemons;
   }*/
-
+}
 
 export default dataFunction;
