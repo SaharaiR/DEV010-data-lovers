@@ -30,11 +30,11 @@ nav {
     -webkit-text-stroke:2px rgb(225, 23, 23);
     letter-spacing: 2.5px;
     display: inline-block; /* Hace que el texto sea un bloque en línea */
-    animation: marquee 8s linear infinite; 
+    animation: marquee 15s linear infinite; 
 }
 @keyframes marquee {
-    0% { transform: translateX(100%); } 
-    100% { transform: translateX(0%); } 
+    0% { transform: translateX(100%); } /* Inicio: texto desplazado 100% hacia la derecha */
+    100% { transform: translateX(-100%); } 
 }
 
 button[name="johto"]{
@@ -45,9 +45,6 @@ button[name="johto"]{
     font-size: 30px;
     font-family:'Monomaniac One', sans-serif; 
     margin-bottom: auto;  
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button[name="kanto"]{
@@ -58,9 +55,6 @@ button[name="kanto"]{
     font-family:'Monomaniac One', sans-serif;
     font-size: 30px;
     margin-bottom: auto;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
     
 .container {
@@ -99,7 +93,6 @@ button[name="kanto"]{
         letter-spacing: 2.5px;  
         align-items:center;
         background-color: rgb(255,215,0);
-        border-radius: 8px;
     }
     
     .img-pokemon1{
@@ -110,20 +103,34 @@ button[name="kanto"]{
     }
     
     #cards{
-        /*position: absolute;*/
-        display: grid;        
-        backface-visibility: hidden;
-        transition: 5s;
+       position: relative;
+        /*height: 500px; /* ajustar según necesario */
+        /*overflow: hidden;*/
+        
+       /* backface-visibility: hidden;
+        transition: 5s;*/
+    }
+
+    .containerCards{
+       /*position: relative;*/
+        display: grid;
     }
 
     #frontCards, #backCards{
-        /*display: grid;*/
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Las tarjetas tendrán un ancho mínimo de 150px y se adaptarán al ancho disponible */
-        gap: 10px; /* Espacio de 10px entre las tarjetas */
-        border: 1px solid black;
-        border-radius: 5px; 
-        /*backface-visibility: hidden;*/
         /*position: absolute;*/
+        /*top: 0;
+        left: 0;*/
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+
+    .pokemon-card{
+        text-align: center;
+        border: 1px solid;
+        border-radius: 5px;
+        background-color: rgb(229, 241, 57);
+        width: 175px;
+        height: 250px;
     }
 
     #frontCards{
@@ -145,17 +152,7 @@ button[name="kanto"]{
     }
 
     .reverseBack{
-        transform: perspective(500px) rotateY(360deg); 
-    }
-
-    .pokemon-card{
-        /*position: absolute;*/
-        text-align: center;
-        border: 1px solid;
-        border-radius: 5px;
-        background-color: rgba(247, 255, 128, 0.637);
-        cursor: pointer; /* Agregamos un cursor de puntero al pasar sobre la tarjeta */
-        perspective: 2000px; /*efecto 3D*/
+        transform: perspective(500px) rotateY(360deg);
     }
 
     .frontText{
@@ -163,23 +160,9 @@ button[name="kanto"]{
         font-family:'Monomaniac One', sans-serif;
         font-size: 18px;
     }
-    .reverse-content{
-        transform: rotateY(-180deg);
-        backface-visibility: show;
-        transition: transform 0.80s;
-        perspective: 2000px; /*efecto 3D*/
-        background-color: rgba(247, 255, 128, 0.637);
-    }
     .reverseText{
         font-family:'Monomaniac One', sans-serif;
         font-size: 18px;
-        text-align: center;
-        border: 1px solid;
-        border-radius: 5px;
-        /*flex-wrap: nowrap;*/
-        background-color: rgba(247, 255, 128, 0.637);
-        backface-visibility: hidden;
-        /*position: absolute;*/
     }
 
     #buttons{
@@ -194,8 +177,6 @@ button[name="kanto"]{
         height: 64px;
         background-image: url(assets/atras64.png);
         border-radius: 8px;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }    
     .previousIcon{
         display: inline-block;
@@ -203,8 +184,6 @@ button[name="kanto"]{
         height: 64px;
         background-image: url(assets/adelante64.png);
         border-radius: 8px;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     #changeRegion{
         width: 68px;
@@ -213,13 +192,9 @@ button[name="kanto"]{
     }
     .nextIcon:hover, .previousIcon:hover{
         background-color: rgba(255, 0, 0, 0.445);
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     } 
     #changeRegion:hover{
         background-color: rgba(251, 255, 0, 0.445);
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     #search{
         width: 68px;
