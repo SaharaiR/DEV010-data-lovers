@@ -5,16 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   //DECLARACIONES
   const btnKanto = document.getElementById("showKantoCards");
   const btnJohto = document.getElementById("showJohtoCards");
-  const begin = document.querySelector(".begin");
-
-  const frontCards = document.getElementById("frontCards"); //el div dónde se pondrán las tarjetas
-  
+  const begin = document.querySelector(".begin");  
   const marquee = document.getElementById("marquee");
   const btnNext = document.getElementById("btnNext");
   const btnPrev = document.getElementById("btnPrev");
   const btnChangeRegion = document.getElementById("changeRegion");
-  const pokemons = 151;//donde termina
-  //const pokemonsJohto = 151;
+  const pokemons = 151;
   const cardPerPage = 25; //definir cuantas tarjetas se presentaran por pagina el grid  
   const btnAsc = document.getElementById("btnAscendent");
   const btnDes = document.getElementById("btnDescendent");
@@ -28,10 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnReset = document.getElementById("resetFilters");
 
   const cards = document.getElementById("cards");
-  //const frontCards = document.getElementById("frontCards");
+  const container = document.getElementsByClassName("containerCards");
+  const frontCards = document.getElementById("frontCards");
   const backCards = document.getElementById("backCards");
  
   let longArrayF, filterByRarity, filteredByGeneration, filteredByType;//, filterCombine;
+  let generationOption, selectedType, selectedRarity;
   let arrayDescendent, arraySearch;
   let numberPage = 1; //llevar el conteo de páginas*
   let kanto = false, johto = false;
@@ -82,10 +80,10 @@ document.addEventListener("DOMContentLoaded", function () {
   })
 
   btnFilter.addEventListener("click", () => {
-    const generationOption = filterGenerationSelect.value;
-    const selectedType = typeSelect.value;
-    const selectedRarity= raritySelect.value;
     numberPage = 1;
+    generationOption = filterGenerationSelect.value;
+    selectedType = typeSelect.value;
+    selectedRarity= raritySelect.value;
     // Llamar a la función de filtrado y pasar los argumentos necesarios
     if(generationOption === "cero" && selectedType === "cero" && selectedRarity === "cero"){
       //no hay seleccionado nada
@@ -110,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
       btnPush = "rareza";
       filterArrays(numberPage, filterByRarity);
     }
-
     /*filterCombine = dataFunction.filterCombine(data.pokemon, selectedRarity, selectedType, generationOption);
     console.log(filterCombine.length);
     if(filterCombine.length > 0){
@@ -122,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
   btnSearch.addEventListener("click", () => {
     numberPage = 1;
     const numberOrName = valueSearch.value;
+    alerts.innerHTML = "";
     //console.log(numberOrName);
     if(numberOrName === null){
       alerts.innerHTML = "Please write a pokemon name or a pokemon number";
@@ -145,13 +143,35 @@ document.addEventListener("DOMContentLoaded", function () {
     marquee.innerHTML = "ALL POKEMONS";
     kanto = false;
     johto = false;
+    filterGenerationSelect.value = 0;
+    typeSelect.value = 0;
+    raritySelect.value = 0;
+    alerts.innerHTML = "";
     btnPush = "ascendent";
     filterArrays(numberPage, data.pokemon);
   });
 
+  function backCard(){
+    const eachCard = document.querySelectorAll('.pokemon-card');
+    eachCard.forEach((element) => {
+      element.addEventListener('mouseover', (event) => {
+        const card = event.target.closest('.pokemon-card');
+        card.classList.add('reverse');
+        cards.addEventListener('mouseout', (event) => {
+          const card = event.target.closest('.pokemon-card');
+          if (card) {
+            card.classList.remove('reverseBack');
+          }
+        });
+      });
+    });
+  }      
+
   //FUNCIONES
   function loadPkm(page){
+    //cards.innerHTML = "";
     frontCards.innerHTML = "";
+    backCards.innerHTML = "";
     begin.style.display = "none";
     if(kanto){
       marquee.innerHTML = "Kanto Region";
@@ -180,6 +200,11 @@ document.addEventListener("DOMContentLoaded", function () {
       const namePkn = document.createTextNode((data.pokemon[i].name).toUpperCase());
       const heightPkn = document.createTextNode("Height: " + (data.pokemon[i].size.height));
       const weightPkn = document.createTextNode("Weight: " + (data.pokemon[i].size.weight));
+      const factAbout = document.createTextNode(data.pokemon[i].about);
+      const factsType = document.createTextNode("Type: " + data.pokemon[i].type);
+      const factsWeak = document.createTextNode("Weakness: " + data.pokemon[i].weakness);
+      const factsResistant = document.createTextNode("Resistant: " + data.pokemon[i].resistant);
+      
       const picture = document.createElement('picture');
       picture.classList = 'pokemon-card';
       const img = document.createElement('img');
@@ -196,13 +221,26 @@ document.addEventListener("DOMContentLoaded", function () {
       figCaption.appendChild(document.createElement('br'));
       figCaption.appendChild(weightPkn);
       picture.appendChild(figCaption);
-      //cards.appendChild(picture);
-      frontCards.appendChild(picture)
+      frontCards.appendChild(picture);
+
+      const factsInfo = document.createElement('span');
+      factsInfo.classList = 'pokemon-card';
+      factsInfo.appendChild(factAbout);
+      factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(factsType);
+      factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(factsWeak);
+      factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(factsResistant);
+      factsInfo.appendChild(document.createElement('br'));
+      backCards.appendChild(factsInfo);
     }
     cards.style.display = "grid";
     frontCards.style.display = "grid";
+    backCards.style.display = "grid";
+    backCard();
     /*if(frontCards.childNodes.length !== 0){
-      backCard()
+      backCard();
     }*/
   }
 
@@ -452,29 +490,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }*/
 
-  /* function backCard(){
-    const eachCard = document.querySelectorAll('.pokemon-card')
-    //console.log(eachCard)
-    eachCard.forEach((element) => {
-      element.addEventListener('mouseover', (event) => {
-        const card = event.target.closest('.pokemon-card');
-        card.classList.add('reverse');
-        //console.log(event.target.id)
-        createReverseContent(event.target.id);
-        cards.addEventListener('mouseout', (event) => {
-          const card = event.target.closest('.pokemon-card');
-          if (card) {
-            card.classList.remove('reverseBack');
-          }
-        });
-      });
-    })
-  }*/
-
-  function createReverseContent(numberPokemon) {
+/* function createReverseContent(numberPokemon) {
     //console.log(numberPokemon);
     /*const reverseContent = document.createElement('div');
-    reverseContent.classList = 'reverse-content';*/
+    reverseContent.classList = 'reverse-content';
     data.pokemon.forEach(facts => {
       if(facts.num === numberPokemon){
         //facts['special-attack'].forEach(attribute =>{
@@ -503,7 +522,6 @@ document.addEventListener("DOMContentLoaded", function () {
       backCards.style.display = "grid";
     });
     /*console.log(reverseContent);
-    return reverseContent;*/
-  }
-  //});
+    return reverseContent;
+  }*/
 });

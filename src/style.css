@@ -103,26 +103,48 @@ button[name="kanto"]{
     }
     
     #cards{
-        /*position: absolute;*/
-        display: grid;
+       position: relative;
+        /*height: 500px; /* ajustar según necesario */
+        /*overflow: hidden;*/
         
-        backface-visibility: hidden;
-        transition: 5s;
+       /* backface-visibility: hidden;
+        transition: 5s;*/
+    }
+
+    .containerCards{
+       /*position: relative;*/
+        display: grid;
     }
 
     #frontCards, #backCards{
-        
-        border: 1px solid black;
+        /*position: absolute;*/
+        /*top: 0;
+        left: 0;*/
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+
+    .pokemon-card{
+        text-align: center;
+        border: 1px solid;
         border-radius: 5px;
+        background-color: rgb(229, 241, 57);
+        width: 175px;
+        height: 250px;
     }
 
     #frontCards{
-        grid-template-columns: repeat(5, 1fr);
         transform: perspective(500px) rotateY(0deg);
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        backface-visibility: hidden;
     }
 
     #backCards{
         transform: perspective(500px) rotateY(180deg);
+       z-index: 1;
     }
 
     .reverse{
@@ -130,14 +152,7 @@ button[name="kanto"]{
     }
 
     .reverseBack{
-        transform: perspective(500px) rotateY(360deg); 
-    }
-
-    .pokemon-card{
-        text-align: center;
-        border: 1px solid;
-        border-radius: 5px;
-        background-color: rgba(247, 255, 128, 0.637);
+        transform: perspective(500px) rotateY(360deg);
     }
 
     .frontText{
