@@ -117,13 +117,14 @@ button[name="kanto"]{
     }
 
     #frontCards, #backCards{
-        display: grid;
+      /*display: grid;*/
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Las tarjetas tendrán un ancho mínimo de 150px y se adaptarán al ancho disponible */
         gap: 10px; /* Espacio de 10px entre las tarjetas */
         border: 1px solid black;
         border-radius: 5px; 
-        /*backface-visibility: hidden;
-        position: absolute;*/
+        /*backface-visibility: hidden;*/
+        /*position: absolute;*/
+
     }
 
     #frontCards{
