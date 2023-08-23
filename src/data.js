@@ -33,7 +33,31 @@ const dataFunction = {
     });
   } 
 };
-/* filterCombine: (pokemons, rarity, type, generation) => {
+  /*applyFilters: (data, selectedGeneration, selectedType, selectedRarity) => {
+    let filteredPokemons = data;
+  
+    if (selectedGeneration !== 'cero') {
+      filteredPokemons = filteredPokemons.filter(pokemon => {
+        return pokemon.generation.num.toLowerCase() === selectedGeneration.toLowerCase();
+      });
+    }
+  
+    if (selectedType !== 'cero') {
+      filteredPokemons = filteredPokemons.filter(pokemon => {
+        return pokemon.type.includes(selectedType);
+      });
+    }
+  
+    if (selectedRarity !== 'cero') {
+      filteredPokemons = filteredPokemons.filter(pokemon => {
+        return pokemon['pokemon-rarity'] === selectedRarity;
+      });
+    }
+  
+    return filteredPokemons;
+}
+  
+/*filterCombine: (pokemons, rarity, type, generation) => {
     //let filtered = pokemons;
     if(rarity) {
       //filtered = filtered.filter(p => p['pokemon-rarity'] === rarity);
@@ -49,4 +73,5 @@ const dataFunction = {
     }
     return pokemons;
   }*/
+}
 export default dataFunction;
