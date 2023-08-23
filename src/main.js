@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnReset = document.getElementById("resetFilters");
 
   const cards = document.getElementById("cards");
-  const container = document.getElementsByClassName("containerCards");
   const frontCards = document.getElementById("frontCards");
   const backCards = document.getElementById("backCards");
  
@@ -152,21 +151,22 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function backCard(){
-    const eachCard = document.querySelectorAll('.pokemon-card');
+    const eachCard = document.querySelectorAll('.pokemon-card')
+    //console.log(eachCard)
     eachCard.forEach((element) => {
       element.addEventListener('mouseover', (event) => {
         const card = event.target.closest('.pokemon-card');
-        card.classList.add('reverse');
-        cards.addEventListener('mouseout', (event) => {
-          const card = event.target.closest('.pokemon-card');
-          if (card) {
-            card.classList.remove('reverseBack');
-          }
-        });
+        card.classList.add('reverse-content');
       });
-    });
-  }      
-
+      cards.addEventListener('mouseout', (event) => {
+        const card = event.target.closest('.pokemon-card');
+        if (card) {
+          card.classList.remove('reverse-content');
+        }
+      });
+    })
+  }    
+ 
   //FUNCIONES
   function loadPkm(page){
     //cards.innerHTML = "";
@@ -223,8 +223,10 @@ document.addEventListener("DOMContentLoaded", function () {
       picture.appendChild(figCaption);
       frontCards.appendChild(picture);
 
+      const pictureBack = document.createElement('picture');
+      pictureBack.classList = 'pokemon-card';
       const factsInfo = document.createElement('span');
-      factsInfo.classList = 'pokemon-card';
+      factsInfo.classList = "reverseText";
       factsInfo.appendChild(factAbout);
       factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsType);
@@ -233,15 +235,15 @@ document.addEventListener("DOMContentLoaded", function () {
       factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsResistant);
       factsInfo.appendChild(document.createElement('br'));
-      backCards.appendChild(factsInfo);
+      pictureBack.appendChild(factsInfo);
+      backCards.appendChild(pictureBack);
     }
     cards.style.display = "grid";
     frontCards.style.display = "grid";
-    backCards.style.display = "grid";
-    backCard();
-    /*if(frontCards.childNodes.length !== 0){
+    backCards.style.display = "grid ";
+    if(frontCards.childNodes.length !== 0){
       backCard();
-    }*/
+    }
   }
 
   function nextPage() {
@@ -351,6 +353,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function filterArrays(page, arrayF){
     frontCards.innerHTML = "";
+    backCards.innerHTML = "";
     longArrayF = arrayF.length;
     const filterBegin = (page - 1) * cardPerPage;
     const filterEnd = Math.min(filterBegin + cardPerPage, arrayF.length);
@@ -359,6 +362,12 @@ document.addEventListener("DOMContentLoaded", function () {
       const namePkn = document.createTextNode((arrayF[i].name).toUpperCase());
       const heightPkn = document.createTextNode("Height: " + (arrayF[i].size.height));
       const weightPkn = document.createTextNode("Weight: " + (arrayF[i].size.weight));
+
+      const factAbout = document.createTextNode(arrayF[i].about);
+      const factsType = document.createTextNode("Type: " + arrayF[i].type);
+      const factsWeak = document.createTextNode("Weakness: " + arrayF[i].weakness);
+      const factsResistant = document.createTextNode("Resistant: " + arrayF[i].resistant);
+
       const picture = document.createElement('picture');
       picture.classList = 'pokemon-card';
       const img = document.createElement('img');
@@ -375,16 +384,44 @@ document.addEventListener("DOMContentLoaded", function () {
       figCaption.appendChild(weightPkn);
       picture.appendChild(figCaption);
       frontCards.appendChild(picture);
+
+      const pictureBack = document.createElement('picture');
+      pictureBack.classList = 'pokemon-card';
+      const factsInfo = document.createElement('span');
+      factsInfo.classList = "reverseText";
+      factsInfo.appendChild(factAbout);
+      factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(factsType);
+      factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(factsWeak);
+      factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(factsResistant);
+      factsInfo.appendChild(document.createElement('br'));
+      pictureBack.appendChild(factsInfo);
+      backCards.appendChild(pictureBack);
+    }
+    cards.style.display = "grid";
+    frontCards.style.display = "grid";
+    backCards.style.display = "grid";
+    if(frontCards.childNodes.length !== 0){
+      backCard();
     }
   }
 
   function pokemonFound(arrayF){
     marquee.innerHTML = "Gotcha! " + arrayF.name.toUpperCase();
     frontCards.innerHTML = "";
+    backCards.innerHTML = "";
     const numPkn = document.createTextNode("No. " + arrayF.num);
     const namePkn = document.createTextNode((arrayF.name).toUpperCase());
     const heightPkn = document.createTextNode("Height: " + (arrayF.size.height));
     const weightPkn = document.createTextNode("Weight: " + (arrayF.size.weight));
+
+    const factAbout = document.createTextNode(arrayF.about);
+    const factsType = document.createTextNode("Type: " + arrayF.type);
+    const factsWeak = document.createTextNode("Weakness: " + arrayF.weakness);
+    const factsResistant = document.createTextNode("Resistant: " + arrayF.resistant);
+
     const picture = document.createElement('picture');
     picture.classList = 'pokemon-card';
     const img = document.createElement('img');
@@ -401,6 +438,28 @@ document.addEventListener("DOMContentLoaded", function () {
     figCaption.appendChild(weightPkn);
     picture.appendChild(figCaption);
     frontCards.appendChild(picture);
+
+    const pictureBack = document.createElement('picture');
+    pictureBack.classList = 'pokemon-card';
+    const factsInfo = document.createElement('span');
+    factsInfo.classList = "reverseText";
+    factsInfo.appendChild(factAbout);
+    factsInfo.appendChild(document.createElement('br'));
+    factsInfo.appendChild(factsType);
+    factsInfo.appendChild(document.createElement('br'));
+    factsInfo.appendChild(factsWeak);
+    factsInfo.appendChild(document.createElement('br'));
+    factsInfo.appendChild(factsResistant);
+    factsInfo.appendChild(document.createElement('br'));
+    pictureBack.appendChild(factsInfo);
+    backCards.appendChild(pictureBack);
+  
+    cards.style.display = "grid";
+    frontCards.style.display = "grid";
+    backCards.style.display = "grid";
+    if(frontCards.childNodes.length !== 0){
+      backCard();
+    }
   }
 
   /*function arrayGeneration(pagina, arrayF){
@@ -488,41 +547,5 @@ document.addEventListener("DOMContentLoaded", function () {
       picture.appendChild(figCaption);
       tarjetas.appendChild(picture);
     }
-  }*/
-
-/* function createReverseContent(numberPokemon) {
-    //console.log(numberPokemon);
-    /*const reverseContent = document.createElement('div');
-    reverseContent.classList = 'reverse-content';
-    data.pokemon.forEach(facts => {
-      if(facts.num === numberPokemon){
-        //facts['special-attack'].forEach(attribute =>{
-        //const attackAbout = document.createTextNode("About: " + attack.about);
-        const factAbout = document.createTextNode(facts.about);
-        const factsType = document.createTextNode("Type: " + facts.type);
-        const factsWeak = document.createTextNode("Weakness: " + facts.weakness);
-        const factsResistant = document.createTextNode("Resistant: " + facts.resistant);
-          
-
-        const factsInfo = document.createElement('p');
-        factsInfo.classList = 'reverseText';
-        //attackInfo.appendChild(attackAbout);
-        factsInfo.classList = 'pokemon-card';
-        factsInfo.appendChild(factAbout);
-        factsInfo.appendChild(document.createElement('br'));
-        factsInfo.appendChild(factsType);
-        factsInfo.appendChild(document.createElement('br'));
-        factsInfo.appendChild(factsWeak);
-        factsInfo.appendChild(document.createElement('br'));
-        factsInfo.appendChild(factsResistant);
-        factsInfo.appendChild(document.createElement('br'));
-        backCards.appendChild(factsInfo);
-        //reverseContent.appendChild(document.createElement('hr'));
-        //});
-      }
-      backCards.style.display = "grid";
-    });
-    /*console.log(reverseContent);
-    return reverseContent;
   }*/
 });

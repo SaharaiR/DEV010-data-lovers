@@ -104,24 +104,18 @@ button[name="kanto"]{
     
     #cards{
        position: relative;
-        /*height: 500px; /* ajustar según necesario */
-        /*overflow: hidden;*/
-        
-       /* backface-visibility: hidden;
-        transition: 5s;*/
     }
 
     .containerCards{
-       /*position: relative;*/
-        display: grid;
+       position: relative;
     }
 
     #frontCards, #backCards{
-        /*position: absolute;*/
-        /*top: 0;
-        left: 0;*/
         grid-template-columns: repeat(5, 1fr);
-        gap: 10px;
+        display: flex;
+        width: 100%;
+        gap: 5px;
+        transition: transform 0.5s ease;
     }
 
     .pokemon-card{
@@ -129,12 +123,12 @@ button[name="kanto"]{
         border: 1px solid;
         border-radius: 5px;
         background-color: rgb(229, 241, 57);
-        width: 175px;
-        height: 250px;
+        width: 200px;
+        height: 310px;
     }
 
     #frontCards{
-        transform: perspective(500px) rotateY(0deg);
+        /*transform: perspective(500px) rotateY(0deg);*/
         position: absolute;
         top: 0;
         left: 0;
@@ -143,8 +137,7 @@ button[name="kanto"]{
     }
 
     #backCards{
-        transform: perspective(500px) rotateY(180deg);
-       z-index: 1;
+        z-index: 1;
     }
 
     .reverse{
@@ -155,14 +148,23 @@ button[name="kanto"]{
         transform: perspective(500px) rotateY(360deg);
     }
 
+    .reverse-content{
+        transform: rotateY(-180deg);
+        backface-visibility: hidden;
+        transition: transform 0.80s;
+        perspective: 2000px; /*efecto 3D*/
+        background-color: rgba(247, 255, 128, 0.637);
+    }
+
     .frontText{
         text-align: center;
         font-family:'Monomaniac One', sans-serif;
         font-size: 18px;
     }
     .reverseText{
+        text-align: center;
         font-family:'Monomaniac One', sans-serif;
-        font-size: 18px;
+        font-size: 14px;
     }
 
     #buttons{
