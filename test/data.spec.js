@@ -1,4 +1,3 @@
-
 import dataFunction from '../src/data';
 
 describe('sortDescendent', () => {

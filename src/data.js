@@ -1,4 +1,5 @@
 // estas funciones son de ejemplo
+
 const dataFunction = {
   filterGeneration: (data, generation) => { 
     const filteredPokemons = data.filter(pokemon => {
@@ -6,8 +7,6 @@ const dataFunction = {
     });
     return filteredPokemons;
   },
-
-  
   filterByType: (pokemons, selectedType) => {
     return pokemons.filter(pokemon => {
       return pokemon.type.includes(selectedType);
@@ -32,8 +31,8 @@ const dataFunction = {
     return pokemon.find(p => {
       return p.num === nameOrNumber || p.name === nameOrNumber; 
     });
-  },
-    
+  } 
+};
   /*applyFilters: (data, selectedGeneration, selectedType, selectedRarity) => {
     let filteredPokemons = data;
   
@@ -75,5 +74,4 @@ const dataFunction = {
     return pokemons;
   }*/
 }
-
 export default dataFunction;
