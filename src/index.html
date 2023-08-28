@@ -49,7 +49,7 @@
             <option value="dark">Dark</option>
             <option value="ground">Ground</option>
             <option value="poison">Poison</option>
-            <option value="flying">Fairy</option>
+            <option value="flying">Flying</option>
         </select>
         <label for="categoryGeneration">Generation</label>
         <select id="categoryGeneration" class="formlabel">
@@ -70,19 +70,21 @@
         <button id="btnDescendent">Descendent</button>
         <input id="valueSearch" class="formlabel" placeholder="Search by name or pokemon number...">
         <button id="search"></button>
-        <button id = "resetFilters">Reset Filters</button>
         <span id = "alerts"></span>
     </div>
-    <br>
+    <div id = "statsAttack" style="display: none;">You can calculate wich pokemon to beat
+      <input id="firstPkm" placeholder="Search by name or pokemon numer" class="formlabel">
+      <button id= "comparePkm">COMPARE</button>
+      <button id = "resetFilters">RESERT ALL</button>
+      <span id = "alertsCompare"></span>
+    </div>
     <div id="root">
-
       <div id="cards" style="display: none;">
         <div class = "containerCards">
           <div id = "frontCards" style="display: none;"></div> 
           <div id = "backCards" style="display: none;"></div>
         </div>  
       </div>
-      <!--<div style="height: 300px;"></div>-->
       <div id = "buttons">
         <button id="btnPrev" style = "display: none;" title="Previous page"><span class = "nextIcon"></span></button>
         <button id="btnNext" style = "display: none;" title="Next page"><span class = "previousIcon"></span></button>

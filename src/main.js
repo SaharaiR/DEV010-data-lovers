@@ -21,7 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnSearch = document.getElementById("search");
   const valueSearch = document.getElementById("valueSearch");
   const alerts = document.getElementById("alerts");
+  const alertsCompare = document.getElementById("alertsCompare");
   const btnReset = document.getElementById("resetFilters");
+  const btnCompare = document.getElementById("comparePkm");
+  const valuePkm1 = document.getElementById("firstPkm");
 
   const cards = document.getElementById("cards");
   const frontCards = document.getElementById("frontCards");
@@ -29,10 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
  
   let longArrayF, filterByRarity, filteredByGeneration, filteredByType;//, filterCombine;
   let generationOption, selectedType, selectedRarity;
-  let arrayDescendent, arraySearch;
+  let arrayAscendent, arrayDescendent, arraySearch, pokemonStronger;
   let numberPage = 1; //llevar el conteo de páginas*
   let kanto = false, johto = false;
-  let btnPush = ""; 
+  let btnPush = "", ascendent = false, descendent = false;
+
 
   //EVENTOS
   btnKanto.addEventListener("click", function() {
@@ -51,17 +55,23 @@ document.addEventListener("DOMContentLoaded", function () {
     numberPage = 1;
     kanto = false;
     johto = false;
+    const sortBy = "num";
+    const sortOrder = "ascendent";
     marquee.innerHTML = "Ascendent by pokemon number (ALL)";
-    btnPush = "ascendent";
-    filterArrays(numberPage, data.pokemon);
+    ascendent = true;
+    arrayAscendent = dataFunction.sortData(data.pokemon, sortBy, sortOrder);
+    filterArrays(numberPage, arrayAscendent);
   });
   btnDes.addEventListener("click", function() {
     numberPage = 1;
     kanto = false;
     johto = false;
+    descendent = true;
+    const sortBy = "num";
+    const sortOrder = "descendent";
     marquee.innerHTML = "Descendent by pokemon number (ALL)";
     btnPush = "descendent";
-    arrayDescendent = dataFunction.sortDescendent(data.pokemon);
+    arrayDescendent = dataFunction.sortData(data.pokemon,sortBy,sortOrder);
     filterArrays(numberPage, arrayDescendent);
   });
 
@@ -75,11 +85,17 @@ document.addEventListener("DOMContentLoaded", function () {
       johto = false;
       kanto = true;
       loadPkm(numberPage);
+    }else{
+      kanto = true;
+      johto = false;
+      loadPkm(numberPage);
     }
   })
 
   btnFilter.addEventListener("click", () => {
     numberPage = 1;
+    kanto = false;
+    johto = false;
     generationOption = filterGenerationSelect.value;
     selectedType = typeSelect.value;
     selectedRarity= raritySelect.value;
@@ -107,12 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
       btnPush = "rareza";
       filterArrays(numberPage, filterByRarity);
     }
-    /*filterCombine = dataFunction.filterCombine(data.pokemon, selectedRarity, selectedType, generationOption);
-    console.log(filterCombine.length);
-    if(filterCombine.length > 0){
-      botonPresionado = "combine";
-      arraysFiltrados(numeroPagina, filterCombine);
-    }*/
   });
   
   btnSearch.addEventListener("click", () => {
@@ -142,12 +152,35 @@ document.addEventListener("DOMContentLoaded", function () {
     marquee.innerHTML = "ALL POKEMONS";
     kanto = false;
     johto = false;
-    filterGenerationSelect.value = 0;
-    typeSelect.value = 0;
-    raritySelect.value = 0;
+    filterGenerationSelect.value = "cero";
+    typeSelect.value = "cero";
+    raritySelect.value = "cero";
     alerts.innerHTML = "";
+    alertsCompare.innerHTML = "";
+    valueSearch.value = "";
+    valuePkm1.value = "";
     btnPush = "ascendent";
     filterArrays(numberPage, data.pokemon);
+  });
+
+  btnCompare.addEventListener("click", () =>{
+    numberPage = 1;
+    kanto = false;
+    johto = false;
+    btnPush = "compare";
+    const numberOrName1 = valuePkm1.value;
+    alertsCompare.innerHTML = "";
+    if(numberOrName1 === null){
+      alerts.innerHTML = "Please write a pokemon name or a pokemon number";
+    }else{
+      pokemonStronger = dataFunction.computeStats(data.pokemon, numberOrName1);
+    }       
+    if(pokemonStronger === undefined || pokemonStronger === ""){
+      alertsCompare.innerHTML = "Pokemon not found";
+    }else{
+      filterArrays(numberPage, pokemonStronger);
+      alertsCompare.innerHTML = "YOU CAN BEAT THIS POKEMONS:"
+    }
   });
 
   function backCard(){
@@ -192,6 +225,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnNext.style.display = "inline-block";
     btnChangeRegion.style.display = "block";
     document.getElementById("filterBar").style.display = "block";
+    document.getElementById("statsAttack").style.display = "block";
   }
 
   function cardsByRegion(indexB, indexE){
@@ -202,7 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const weightPkn = document.createTextNode("Weight: " + (data.pokemon[i].size.weight));
       const factAbout = document.createTextNode(data.pokemon[i].about);
       const factsType = document.createTextNode("Type: " + data.pokemon[i].type);
-      const factsWeak = document.createTextNode("Weakness: " + data.pokemon[i].weakness);
+      const factsWeak = document.createTextNode("Weakness: " + data.pokemon[i].weaknesses);
       const factsResistant = document.createTextNode("Resistant: " + data.pokemon[i].resistant);
       
       const picture = document.createElement('picture');
@@ -229,11 +263,15 @@ document.addEventListener("DOMContentLoaded", function () {
       factsInfo.classList = "reverseText";
       factsInfo.appendChild(factAbout);
       factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsType);
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsWeak);
       factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsResistant);
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(document.createElement('br'));
       pictureBack.appendChild(factsInfo);
       backCards.appendChild(pictureBack);
@@ -269,7 +307,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     switch(btnPush){
     case "tipo":
-      if(longArrayF > cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
+      if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
         return;
       }
       numberPage++;
@@ -277,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
       //arrayType(numeroPagina, filteredByType);
       break;
     case "generacion":
-      if(numberPage === Math.ceil(longArrayF / cardPerPage)){
+      if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
         return;
       }
       numberPage++;
@@ -285,27 +323,33 @@ document.addEventListener("DOMContentLoaded", function () {
       //arrayGeneration(numeroPagina, filteredByGeneration);
       break;
     case "rareza":
-      if(numberPage === Math.ceil(longArrayF / cardPerPage)){
+      if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
         return;
       }
       numberPage++;
       filterArrays(numberPage, filterByRarity);
       //arrayRarity(numeroPagina,filterByRarity);
       break;
-    case "ascendent":
-      if(numberPage === Math.ceil(longArrayF / cardPerPage)){
+    case "compare":
+      if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
         return;
       }
       numberPage++;
-      filterArrays(numberPage, data.pokemon);
-      break;
-    case "descendent":
-      if(numberPage === Math.ceil(longArrayF / cardPerPage)){
+      filterArrays(numberPage, pokemonStronger);
+    }
+    if(ascendent){
+      if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
+        return;
+      }
+      numberPage++;
+      filterArrays(numberPage, arrayAscendent);
+    }  
+    if(descendent){
+      if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
         return;
       }
       numberPage++;
       filterArrays(numberPage, arrayDescendent);
-      break;
     }
   }
 
@@ -365,7 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const factAbout = document.createTextNode(arrayF[i].about);
       const factsType = document.createTextNode("Type: " + arrayF[i].type);
-      const factsWeak = document.createTextNode("Weakness: " + arrayF[i].weakness);
+      const factsWeak = document.createTextNode("Weakness: " + arrayF[i].weaknesses);
       const factsResistant = document.createTextNode("Resistant: " + arrayF[i].resistant);
 
       const picture = document.createElement('picture');
@@ -419,7 +463,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const factAbout = document.createTextNode(arrayF.about);
     const factsType = document.createTextNode("Type: " + arrayF.type);
-    const factsWeak = document.createTextNode("Weakness: " + arrayF.weakness);
+    const factsWeak = document.createTextNode("Weakness: " + arrayF.weaknesses);
     const factsResistant = document.createTextNode("Resistant: " + arrayF.resistant);
 
     const picture = document.createElement('picture');
@@ -461,91 +505,4 @@ document.addEventListener("DOMContentLoaded", function () {
       backCard();
     }
   }
-
-  /*function arrayGeneration(pagina, arrayF){
-    tarjetas.innerHTML = "";
-    longArrayF = arrayF.length;
-    const iFiltro = (pagina - 1) * tarjetaPorPagina;
-    const fFiltro = Math.min(iFiltro + tarjetaPorPagina, arrayF.length);
-    for(let i = iFiltro; i < fFiltro; i++) {
-      const numPkn = document.createTextNode("No. " + arrayF[i].num);
-      const nombrePkn = document.createTextNode((arrayF[i].name).toUpperCase());
-      const altPkn = document.createTextNode("Height: " + (arrayF[i].size.height));
-      const pesoPkn = document.createTextNode("Weight: " + (arrayF[i].size.weight));
-      const picture = document.createElement('picture');
-      picture.classList = 'pokemon-card';
-      const img = document.createElement('img');
-      img.src = arrayF[i].img;
-      picture.appendChild(img);
-      const figCaption = document.createElement('figcaption');
-      figCaption.classList = 'textoFrente';
-      figCaption.appendChild(numPkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(nombrePkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(altPkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(pesoPkn);
-      picture.appendChild(figCaption);
-      tarjetas.appendChild(picture);
-    }
-  }*/
-
-  /* function arrayType(pagina, arrayF){
-    tarjetas.innerHTML = "";
-    longArrayF = arrayF.length;
-    const iFiltro = (pagina - 1) * tarjetaPorPagina;
-    const fFiltro = Math.min(iFiltro + tarjetaPorPagina, arrayF.length);
-    for(let i = iFiltro; i < fFiltro; i++) {
-      const numPkn = document.createTextNode("No. " + arrayF[i].num);
-      const nombrePkn = document.createTextNode((arrayF[i].name).toUpperCase());
-      const altPkn = document.createTextNode("Height: " + (arrayF[i].size.height));
-      const pesoPkn = document.createTextNode("Weight: " + (arrayF[i].size.weight));
-      const picture = document.createElement('picture');
-      picture.classList = 'pokemon-card';
-      const img = document.createElement('img');
-      img.src = arrayF[i].img;
-      picture.appendChild(img);
-      const figCaption = document.createElement('figcaption');
-      figCaption.classList = 'textoFrente';
-      figCaption.appendChild(numPkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(nombrePkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(altPkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(pesoPkn);
-      picture.appendChild(figCaption);
-      tarjetas.appendChild(picture);
-    }
-  }*/
-
-  /*function arrayRarity(pagina, arrayF){
-    tarjetas.innerHTML = "";
-    longArrayF = arrayF.length;
-    const iFiltro = (pagina - 1) * tarjetaPorPagina;
-    const fFiltro = Math.min(iFiltro + tarjetaPorPagina, arrayF.length);
-    for(let i = iFiltro; i < fFiltro; i++) {
-      const numPkn = document.createTextNode("No. " + arrayF[i].num);
-      const nombrePkn = document.createTextNode((arrayF[i].name).toUpperCase());
-      const altPkn = document.createTextNode("Height: " + (arrayF[i].size.height));
-      const pesoPkn = document.createTextNode("Weight: " + (arrayF[i].size.weight));
-      const picture = document.createElement('picture');
-      picture.classList = 'pokemon-card';
-      const img = document.createElement('img');
-      img.src = arrayF[i].img;
-      picture.appendChild(img);
-      const figCaption = document.createElement('figcaption');
-      figCaption.classList = 'textoFrente';
-      figCaption.appendChild(numPkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(nombrePkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(altPkn);
-      figCaption.appendChild(document.createElement('br'));
-      figCaption.appendChild(pesoPkn);
-      picture.appendChild(figCaption);
-      tarjetas.appendChild(picture);
-    }
-  }*/
 });

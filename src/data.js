@@ -16,37 +16,48 @@ const dataFunction = {
   filterByRarity: (pokemons, selectedRarity) => {
     return pokemons.filter(pokemon => pokemon['pokemon-rarity'] === selectedRarity);
   },
-  sortDescendent: (pokemons) => {
-    return pokemons.sort((a, b) => {
-      if (a.num > b.num) {
-        return -1;
-      }
-      if (a.num < b.num) {
-        return 1;
-      }
-      return 0;
-    });
+  sortData: (pokemons, sortBy, sortOrder ) => {
+    if(sortOrder === "descendent"){
+      return pokemons.sort((a, b) => {
+        if (a.num > b.num) {
+          return -1;
+        }
+        if (a.num < b.num) {
+          return 1;
+        }
+        return 0;
+      });
+    }else if(sortOrder === "ascendent"){
+      pokemons.sort((a, b) => {
+        if (a.num > b.num) {
+          return -1;
+        }
+        if (a.num < b.num) {
+          return 1;
+        }
+        return 0;
+      });
+      return pokemons.reverse();
+    }
   },
   searching: (pokemon, nameOrNumber) => {
     return pokemon.find(p => {
       return p.num === nameOrNumber || p.name === nameOrNumber; 
     });
-  } 
+  },
+  computeStats: (pokemon, nameOrNumber1) => {
+    let numberPadded1;
+    if(!isNaN(nameOrNumber1)){
+      numberPadded1 = String(nameOrNumber1).padStart(3, '0');
+    }else{
+      nameOrNumber1 = nameOrNumber1.toLowerCase();
+    }
+    const pkm1 = pokemon.find(p => p.num === numberPadded1 || p.name === nameOrNumber1);
+    const weaknesses = pkm1.type;
+    return pokemon.filter(p => {
+      return p.weaknesses.some(w => weaknesses.includes(w));
+    }); 
+  }
 };
-/* filterCombine: (pokemons, rarity, type, generation) => {
-    //let filtered = pokemons;
-    if(rarity) {
-      //filtered = filtered.filter(p => p['pokemon-rarity'] === rarity);
-      pokemons = pokemons.filter(p => p['pokemon-rarity'] === rarity);
-    }
-    if(type) {
-      pokemons = pokemons.filter(p => p['pokemon-type'] === type);
-      //filtered = filtered.filter(p => p['pokemon-type'] === type); 
-    }
-    if(generation) {
-      pokemons = pokemons.filter(p => p['pokemon-generation'] === generation);
-      //filtered = filtered.filter(p => p['pokemon-generation'] === generation);
-    }
-    return pokemons;
-  }*/
+
 export default dataFunction;
