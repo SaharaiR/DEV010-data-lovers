@@ -145,11 +145,11 @@ The product can be used both before and during the Pokémon collection process, 
   #### Low-Fidelity Prototype
 
 **First low fidelity prototype**
- ![imagen 1](src/low%20fidelity-prototype/Baja-fidelidad_1.png)
- ![imagen 2](src/low%20fidelity-prototype/Baja-fidelidad_2png.png)
-  ![imagen 3](src/low%20fidelity-prototype/Baja-fidelidad_3.png)
-    ![imagen 4](src/low%20fidelity-prototype/Baja-fidelidad_4.png)
-      ![imagen 5](src/low%20fidelity-prototype/Baja-fidelidad_5.png)
+![Image 1](src/assets/Baja%20fidelidad_1.png)
+![Image 2](src/assets/Baja%20fidelidad_2.png)
+![Image 3](src/assets/Baja%20fidelidad_3.png)
+![Image 4](src/assets/Baja%20fidelidad_4.png)
+![Image 5](src/assets/Baja%20fidelidad_5.png)
 
       We combine the two low-fidelity prototypes to design the high-fidelity one
 
