@@ -151,7 +151,8 @@ The product can be used both before and during the Pokémon collection process, 
 ![Image 4](src/assets/Baja%20fidelidad_4.png)
 ![Image 5](src/assets/Baja%20fidelidad_5.png)
 
-      We combine the two low-fidelity prototypes to design the high-fidelity one
+ 
+ We combine the two low-fidelity prototypes to design the high-fidelity one.
 
   #### High-Fidelity Prototype"
 
