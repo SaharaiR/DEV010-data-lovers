@@ -7,6 +7,7 @@ const dataFunction = {
     });
     return filteredPokemons;
   },
+  
   filterByType: (pokemons, selectedType) => {
     return pokemons.filter(pokemon => {
       return pokemon.type.includes(selectedType);
@@ -40,6 +41,19 @@ const dataFunction = {
       return pokemons.reverse();
     }
   },
+
+  sortAscendent: (pokemons) =>{
+    return pokemons.sort((a,b) => {
+      if (a.num > b.num){
+        return 1;
+      }
+      if (a.num < b.num){
+        return -1;
+      }
+      return 0;
+    });
+  },
+
   searching: (pokemon, nameOrNumber) => {
     return pokemon.find(p => {
       return p.num === nameOrNumber || p.name === nameOrNumber; 
