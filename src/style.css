@@ -250,7 +250,7 @@ button[name="kanto"]{
         cursor: pointer;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
-    #filterBar {
+    #filterBar, #statsAttack{
         display: flex;
         justify-content:center;
         background-color: rgba(251, 255, 0, 0.445);
@@ -276,7 +276,7 @@ button[name="kanto"]{
         font-family:'Monomaniac One', sans-serif; 
         font-size: 15px;
     }
-    #btnAscendent {
+    #btnAscendent, #btnDescendent, #comparePkm{
         background-color:  rgba(251, 255, 0, 0.434);
         background-color: rgb(255,69,0);
         color: white;
@@ -286,16 +286,6 @@ button[name="kanto"]{
         cursor: pointer;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-    }
-    #btnDescendent {
-        background-color:  rgba(251, 255, 0, 0.434);
-        background-color: rgb(255,69,0);
-        color: white;
-        border-radius: 8px;
-        font-family:'Monomaniac One', sans-serif; 
-        font-size: 15px;
-        cursor: pointer;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     #resetFilters {
         background-color:  rgba(251, 255, 0, 0.434);
@@ -312,6 +302,6 @@ button[name="kanto"]{
         font-family:'Monomaniac One', sans-serif; 
         border-radius: 8px;
     }
-    #alerts{
+    #alerts, #alertsCompare{
         color: red;
     }
