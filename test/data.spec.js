@@ -1,4 +1,3 @@
-
 import dataFunction from '../src/data';
 
 describe('sortDescendent', () => {
@@ -16,6 +15,27 @@ describe('sortDescendent', () => {
 
     const sortedPokemons = dataFunction.sortDescendent(pokemons);
     const sortedNums = pokemons.map(pokemon => pokemon.num).sort((a, b) => b - a);
+    const expectedSortedPokemons = sortedNums.map(num => pokemons.find(pokemon => pokemon.num === num));
+
+    expect(sortedPokemons).toEqual(expectedSortedPokemons);
+  });
+});
+
+describe('sortAscendent', () => {
+  it('is a function', () => {
+    expect(typeof dataFunction.sortAscendent).toEqual('function');
+  });
+
+
+  it('sorts data in ascending order', () => {
+    const pokemons = [
+      { num: 1, name: 'bulbasaur'},
+      { num: 2, name: 'ivysaur' },
+      { num: 3, name: 'venusaur' },
+    ];
+
+    const sortedPokemons = dataFunction.sortAscendent(pokemons);
+    const sortedNums = pokemons.map(pokemon => pokemon.num).sort((a, b) => a - b);
     const expectedSortedPokemons = sortedNums.map(num => pokemons.find(pokemon => pokemon.num === num));
 
     expect(sortedPokemons).toEqual(expectedSortedPokemons);
@@ -105,5 +125,31 @@ describe('searching', () => {
     const foundPokemon = dataFunction.searching(testDataByNameandNumber, searchTerm);
     const expectedFoundPokemon = { num: 149, name: 'dragonite' };
     expect(foundPokemon).toEqual(expectedFoundPokemon);
+  });
+});
+
+describe('filterCombine', () => {
+  it('is a function', () => {
+    expect(typeof dataFunction.filterCombine).toEqual('function');
+  });
+
+  it('filters data based on rarity, type, and generation', () => {
+    const pokemons = [
+      { 'pokemon-rarity': 'normal', 'pokemon-type': 'grass', 'pokemon-generation': 'i' },
+      { 'pokemon-rarity': 'mythic', 'pokemon-type': 'fire', 'pokemon-generation': 'ii' },
+      { 'pokemon-rarity': 'normal', 'pokemon-type': 'water', 'pokemon-generation': 'i' },
+      { 'pokemon-rarity': 'legendary', 'pokemon-type': 'electric', 'pokemon-generation': 'ii' },
+    ];
+
+    const selectedRarity = 'normal';
+    const selectedType = 'water';
+    const generation = 'i';
+
+    const filteredPokemons = dataFunction.filterCombine(pokemons, selectedRarity, selectedType, generation);
+    const expectedFilteredPokemons = [
+      { 'pokemon-rarity': 'normal', 'pokemon-type': 'water', 'pokemon-generation': 'i' },
+    ];
+
+    expect(filteredPokemons).toEqual(expectedFilteredPokemons);
   });
 });
