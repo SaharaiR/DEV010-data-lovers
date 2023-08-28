@@ -89,15 +89,11 @@ document.addEventListener("DOMContentLoaded", function () {
       kanto = false;
       loadPkm(numberPage);
     }else{
-      kanto =!kanto 
-      johto = !johto
-      loadPkm(numberPage);
-    }else{
       kanto = true;
       johto = false;
       loadPkm(numberPage);
     }
-  })
+  });
    
   btnFilter.addEventListener("click", () => {
     numberPage = 1;
@@ -246,6 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  //FUNCIONES
   function backCard(){
     const eachCard = document.querySelectorAll('.pokemon-card')
     //console.log(eachCard)
@@ -262,9 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     })
   }    
- 
-  //FUNCIONES
- 
+  
   function loadPkm(page){
     //cards.innerHTML = "";
     frontCards.innerHTML = "";
