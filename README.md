@@ -146,7 +146,7 @@ The product can be used both before and during the Pokémon collection process, 
 
 **First low fidelity prototype**
 ![Image 1](src/assets/Baja%20fidelidad_1.png)
-![Image 2](src/assets/Baja%20fidelidad_2.png)
+![Image 2](src/assets/Baja%20fidelidad_2png.png)
 ![Image 3](src/assets/Baja%20fidelidad_3.png)
 ![Image 4](src/assets/Baja%20fidelidad_4.png)
 ![Image 5](src/assets/Baja%20fidelidad_5.png)
