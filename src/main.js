@@ -1,5 +1,6 @@
 import data from './data/pokemon/pokemon.js';
 import dataFunction from './data.js';
+//import { number } from 'yargs';
 
 document.addEventListener("DOMContentLoaded", function () {
   //DECLARACIONES
@@ -33,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
   let longArrayF, filterByRarity, filteredByGeneration, filteredByType;//, filterCombine;
   let generationOption, selectedType, selectedRarity;
-  let arrayAscendent, arrayDescendent, arraySearch, pokemonStronger;
+  let arrayAscendent, arrayDescendent, arraySearch, pokemonStronger, combinedFilters;
   let numberPage = 1; //llevar el conteo de páginas*
   let kanto = false, johto = false;
   let btnPush = "", ascendent = false, descendent = false;
@@ -60,8 +61,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const sortBy = "num";
     const sortOrder = "ascendent";
     marquee.innerHTML = "Ascendent by pokemon number (ALL)";
-    btnPush = "ascendent";
-    arrayAscendent = dataFunction.sortAscendent(data.pokemon);
+    ascendent = true;
+    descendent = false;
+    arrayAscendent = dataFunction.sortData(data.pokemon, sortBy, sortOrder);
     filterArrays(numberPage, arrayAscendent);
   });
   
@@ -73,20 +75,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const sortBy = "num";
     const sortOrder = "descendent";
     marquee.innerHTML = "Descendent by pokemon number (ALL)";
-    btnPush = "descendent";
+    ascendent = false;
+    descendent = true;
     arrayDescendent = dataFunction.sortData(data.pokemon,sortBy,sortOrder);
     filterArrays(numberPage, arrayDescendent);
   });
 
   btnChangeRegion.addEventListener("click", function(){
     numberPage = 1;
-    if(generationOption === "kanto"){
-      kanto = true;
-      johto = false;
-      loadPkm(numberPage);
-    }else if(generationOption === "johto"){
-      johto = true;
+    if(kanto){
       kanto = false;
+      johto = true;
+      loadPkm(numberPage);
+    }else if(johto){
+      johto = false;
+      kanto = true;
       loadPkm(numberPage);
     }else{
       kanto = true;
@@ -97,8 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
    
   btnFilter.addEventListener("click", () => {
     numberPage = 1;
-    kanto =false 
-    johto = false 
+    kanto =false; 
+    johto = false; 
     generationOption = filterGenerationSelect.value;
     selectedType = typeSelect.value;
     selectedRarity = raritySelect.value;
@@ -107,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
       alerts.innerHTML = "Please, select a filter...";
       return;
     }
-      
     // Filtrar por generación
     if (generationOption !== "cero") {
       /*marquee.innerHTML = "Generation: " + generationOption;*/
@@ -164,23 +166,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Combinar los filtros
-    const combinedFilters = dataFunction.filterCombine(filterByRarity, selectedRarity, selectedType, generationOption);
-
+    combinedFilters = dataFunction.filterCombine(filterByRarity, selectedRarity, selectedType, generationOption);
     if (combinedFilters.length > 0) {
+      btnPush = "combine";
       filterArrays(numberPage, combinedFilters);
     } else {
     // Si no hay resultados combinados ni individuales, mostrar una alerta
       if (filterByRarity.length === 0) {
         alerts.innerHTML = "No results found for the selected filters.";
-        
         filterByRarity = [];
         filterArrays(numberPage, filterByRarity);
       } else {
         // Si no hay resultados combinados, utilizar el último filtro individual
         filterArrays(numberPage, filterByRarity)
-    
       }
-  
     }
   });
 
@@ -229,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btnPush = "compare";
     const numberOrName1 = valuePkm1.value;
     alertsCompare.innerHTML = "";
-    if(numberOrName1 === null){
+    if(numberOrName1 === null || numberOrName1 === ""){
       alerts.innerHTML = "Please write a pokemon name or a pokemon number";
     }else{
       pokemonStronger = dataFunction.computeStats(data.pokemon, numberOrName1);
@@ -238,14 +237,13 @@ document.addEventListener("DOMContentLoaded", function () {
       alertsCompare.innerHTML = "Pokemon not found";
     }else{
       filterArrays(numberPage, pokemonStronger);
-      alertsCompare.innerHTML = "YOU CAN BEAT THIS POKEMONS:"
+      alertsCompare.innerHTML = "STADISTICLY YOU CAN BEAT THIS POKEMONS:"
     }
   });
 
   //FUNCIONES
   function backCard(){
     const eachCard = document.querySelectorAll('.pokemon-card')
-    //console.log(eachCard)
     eachCard.forEach((element) => {
       element.addEventListener('mouseover', (event) => {
         const card = event.target.closest('.pokemon-card');
@@ -261,7 +259,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }    
   
   function loadPkm(page){
-    //cards.innerHTML = "";
     frontCards.innerHTML = "";
     backCards.innerHTML = "";
     begin.style.display = "none";
@@ -277,8 +274,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const endIndex = indexBegin + cardPerPage;
       cardsByRegion(indexBegin, endIndex);
     }
-    // Limpiamos el contenido existente en las tarjetas
-    //cards.innerHTML = "";
     //Cargamos demás elementos
     btnPrev.style.display = "inline-block";
     btnNext.style.display = "inline-block";
@@ -395,7 +390,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       numberPage++;
       filterArrays(numberPage, pokemonStronger);
+      break;
+    case "combine":
+      if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
+        return;
+      }
+      numberPage++;
+      filterArrays(numberPage, combinedFilters);
+      break;
     }
+
     if(ascendent){
       if(longArrayF < cardPerPage ||  numberPage === Math.ceil(longArrayF / cardPerPage)){
         return;
@@ -417,13 +421,15 @@ document.addEventListener("DOMContentLoaded", function () {
     if(numberPage === 1){
       return;
     }
-    numberPage--;
     if(kanto){
+      numberPage--;
       loadPkm(numberPage);
     }
     if(johto){
+      numberPage--;
       loadPkm(numberPage);
     }
+
     switch(btnPush){
     case "tipo":
       numberPage--;
@@ -437,20 +443,29 @@ document.addEventListener("DOMContentLoaded", function () {
       numberPage--;
       filterArrays(numberPage, filterByRarity);
       break; 
-    case "ascendent":
-      if(numberPage === Math.ceil(longArrayF / cardPerPage)){
-        return;
-      }
+    case "compare":
       numberPage--;
-      filterArrays(numberPage, data.pokemon);
+      filterArrays(numberPage, pokemonStronger);
       break;
-    case "descendent":
-      if(numberPage === Math.ceil(longArrayF / cardPerPage)){
+    case "combine":
+      numberPage--;
+      filterArrays(numberPage, combinedFilters);  
+      break;
+    }
+
+    if(ascendent){
+      if(numberPage === 1){
         return;
       }
       numberPage--;
       filterArrays(numberPage, arrayDescendent);
-      break;
+    } 
+    if(descendent){
+      if(numberPage === 1){
+        return;
+      }
+      numberPage--;
+      filterArrays(numberPage, arrayDescendent);
     }
   }
 
@@ -494,11 +509,15 @@ document.addEventListener("DOMContentLoaded", function () {
       factsInfo.classList = "reverseText";
       factsInfo.appendChild(factAbout);
       factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsType);
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsWeak);
       factsInfo.appendChild(document.createElement('br'));
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(factsResistant);
+      factsInfo.appendChild(document.createElement('br'));
       factsInfo.appendChild(document.createElement('br'));
       pictureBack.appendChild(factsInfo);
       backCards.appendChild(pictureBack);
@@ -548,11 +567,15 @@ document.addEventListener("DOMContentLoaded", function () {
     factsInfo.classList = "reverseText";
     factsInfo.appendChild(factAbout);
     factsInfo.appendChild(document.createElement('br'));
+    factsInfo.appendChild(document.createElement('br'));
     factsInfo.appendChild(factsType);
+    factsInfo.appendChild(document.createElement('br'));
     factsInfo.appendChild(document.createElement('br'));
     factsInfo.appendChild(factsWeak);
     factsInfo.appendChild(document.createElement('br'));
+    factsInfo.appendChild(document.createElement('br'));
     factsInfo.appendChild(factsResistant);
+    factsInfo.appendChild(document.createElement('br'));
     factsInfo.appendChild(document.createElement('br'));
     pictureBack.appendChild(factsInfo);
     backCards.appendChild(pictureBack);
