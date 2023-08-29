@@ -237,7 +237,8 @@ document.addEventListener("DOMContentLoaded", function () {
       alertsCompare.innerHTML = "Pokemon not found";
     }else{
       filterArrays(numberPage, pokemonStronger);
-      alertsCompare.innerHTML = "STADISTICLY YOU CAN BEAT THIS POKEMONS:"
+      alertsCompare.innerHTML = "STADISTICLY YOU CAN BEAT THIS POKEMONS:";
+      marquee.innerHTML = "STADISTICLY YOU CAN BEAT THIS POKEMONS:";
     }
   });
 
