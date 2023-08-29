@@ -146,3 +146,25 @@ describe('computeStats', () => {
     expect(foundPokemon).toEqual(expectedFoundPokemon);
   });
 });
+
+describe('filterCombine', () => {
+  it('is a function', () => {
+    expect(typeof dataFunction.filterCombine).toEqual('function');
+  });
+  it('filters data based on rarity, type, and generation', () => {
+    const pokemons = [
+      { 'pokemon-rarity': 'normal', 'pokemon-type': 'grass', 'pokemon-generation': 'i' },
+      { 'pokemon-rarity': 'mythic', 'pokemon-type': 'fire', 'pokemon-generation': 'ii' },
+      { 'pokemon-rarity': 'normal', 'pokemon-type': 'water', 'pokemon-generation': 'i' },
+      { 'pokemon-rarity': 'legendary', 'pokemon-type': 'electric', 'pokemon-generation': 'ii' },
+    ];
+    const selectedRarity = 'normal';
+    const selectedType = 'water';
+    const generation = 'i';
+    const filteredPokemons = dataFunction.filterCombine(pokemons, selectedRarity, selectedType, generation);
+    const expectedFilteredPokemons = [
+      { 'pokemon-rarity': 'normal', 'pokemon-type': 'water', 'pokemon-generation': 'i' },
+    ];
+    expect(filteredPokemons).toEqual(expectedFilteredPokemons);
+  });
+})
